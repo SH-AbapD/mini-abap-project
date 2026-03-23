@@ -1,0 +1,49 @@
+managed implementation in class zbp_i_tr_req_hdr unique;
+strict ( 2 );
+
+define behavior for ZI_TR_REQ_HDR alias Req
+persistent table ztr_req_hdr
+lock master
+authorization master ( global, instance )
+etag master LastChangedAt
+{
+  create ( authorization : global );
+  update;
+
+  action cancel;
+  action approve;
+  action reject;
+
+  field ( numbering : managed, readonly ) RequestUuid;
+
+  field ( readonly )
+  Status,
+  ProcessedId,
+  ProcessedAt,
+  RejectReason,
+  CreatedAt,
+  CreatedBy,
+  LastChangedAt,
+  LastChangedBy;
+
+  field ( readonly : update ) EmployeeId,
+  RequestTypeId;
+
+  mapping for ztr_req_hdr
+    {
+      RequestUuid    = request_uuid;
+      EmployeeId     = employee_id;
+      RequestTypeId  = request_type_id;
+      Title          = title;
+      RequestContent = request_content;
+      RequestDate    = request_date;
+      Status         = status;
+      ProcessedId    = processed_id;
+      ProcessedAt    = processed_at;
+      RejectReason   = reject_reason;
+      CreatedAt      = created_at;
+      CreatedBy      = created_by;
+      LastChangedAt  = last_changed_at;
+      LastChangedBy  = last_changed_by;
+    }
+}
