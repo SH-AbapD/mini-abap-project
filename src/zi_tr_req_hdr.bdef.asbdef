@@ -14,6 +14,8 @@ etag master LastChangedAt
   action approve;
   action reject;
 
+  determination setInitialStatus on modify { create; }
+
   field ( numbering : managed, readonly ) RequestUuid;
 
   field ( readonly )
