@@ -1,0 +1,14 @@
+managed implementation in class zbp_i_tr_department unique;
+strict ( 2 );
+
+define behavior for ZI_TR_DEPARTMENT alias Dept
+persistent table ztr_department
+lock master
+authorization master ( instance )
+etag master LastChangedAt
+{
+  create ( authorization : global );
+  update;
+
+  field ( readonly ) DepartmentId;
+}
