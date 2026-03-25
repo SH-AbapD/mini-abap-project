@@ -15,4 +15,16 @@ etag master LastChangedAt
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
 
   field ( readonly : update ) DepartmentId;
+
+  mapping for ztr_department
+    {
+      DepartmentId   = department_id;
+      DepartmentName = department_name;
+      CreatedAt      = created_at;
+      CreatedBy      = created_by;
+      LastChangedAt  = last_changed_at;
+      LastChangedBy  = last_changed_by;
+      IsActive       = is_active;
+    }
+
 }
