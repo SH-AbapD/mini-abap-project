@@ -4,11 +4,15 @@ strict ( 2 );
 define behavior for ZI_TR_DEPARTMENT alias Dept
 persistent table ztr_department
 lock master
-authorization master ( instance )
+authorization master ( global )
 etag master LastChangedAt
 {
-  create ( authorization : global );
+  create;
   update;
 
-  field ( readonly ) DepartmentId;
+  action deactive;
+
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
+
+  field ( readonly : update ) DepartmentId;
 }
