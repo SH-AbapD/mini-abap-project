@@ -1,0 +1,5 @@
+CLASS zbp_i_tr_department DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_tr_department.
+ENDCLASS.
+
+CLASS zbp_i_tr_department IMPLEMENTATION.
+ENDCLASS.

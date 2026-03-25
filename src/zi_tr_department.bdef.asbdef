@@ -10,7 +10,8 @@ etag master LastChangedAt
   create;
   update;
 
-  action deactive;
+  action deactivate;
+  action reactivate;
 
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
 
