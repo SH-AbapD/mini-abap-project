@@ -4,6 +4,9 @@ CLASS lhc_Dept DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       IMPORTING REQUEST requested_authorizations FOR Dept RESULT result.
 
+    METHODS setInitialStatus FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Dept~setInitialStatus.
+
     METHODS deactivate FOR MODIFY
       IMPORTING keys FOR ACTION Dept~deactivate.
 
@@ -18,7 +21,7 @@ CLASS lhc_Dept IMPLEMENTATION.
 
     DATA lv_is_admin TYPE abap_bool.
 
-    lv_is_admin = xsdbool( sy-uname = 'ADMIN' ).
+    lv_is_admin = xsdbool( sy-uname = 'ADMIN' OR sy-uname = 'CB9980003740' ).
 
     IF requested_authorizations-%create = if_abap_behv=>mk-on.
       result-%create = COND #(
@@ -50,6 +53,34 @@ CLASS lhc_Dept IMPLEMENTATION.
         THEN if_abap_behv=>auth-allowed
         ELSE if_abap_behv=>auth-unauthorized
       ).
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD setinitialstatus.
+
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_department\\Dept.
+
+    READ ENTITIES OF zi_tr_department IN LOCAL MODE
+        ENTITY Dept
+        FIELDS ( IsActive )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_dept).
+
+    LOOP AT lt_dept INTO DATA(ls_dept).
+      IF ls_dept-IsActive IS INITIAL.
+        APPEND VALUE #(
+          %tky     = ls_dept-%tky
+          IsActive = 'A'
+        ) TO lt_update.
+      ENDIF.
+    ENDLOOP.
+
+    IF lt_update IS NOT INITIAL.
+      MODIFY ENTITIES OF zi_tr_department IN LOCAL MODE
+        ENTITY Dept
+        UPDATE FIELDS ( IsActive )
+        WITH lt_update.
     ENDIF.
 
   ENDMETHOD.

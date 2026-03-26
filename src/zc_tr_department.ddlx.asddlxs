@@ -1,0 +1,47 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Department',
+    typeNamePlural: 'Departments',
+    title: { value: 'DepartmentName' }
+    }
+annotate entity ZC_TR_DEPARTMENT with
+{
+
+  @UI.facet: [
+    {
+      id: 'GeneralInfo',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10
+    }
+  ]
+
+  @UI: {
+    lineItem: [
+      { position: 10 },
+      { position: 40, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' }
+    ],
+    identification: [ { position: 10 } ],
+    selectionField: [ { position: 10 } ]
+  }
+  DepartmentId;
+
+  @UI: {
+    lineItem: [
+      { position: 20 },
+      { position: 50, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
+    ],
+    identification: [ { position: 20 } ],
+    selectionField: [ { position: 20 } ]
+  }
+  DepartmentName;
+
+  @UI: {
+    lineItem:       [ { position: 30 } ],
+    identification: [ { position: 30 } ]
+  }
+  IsActive;
+  
+    
+}
