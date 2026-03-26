@@ -13,6 +13,8 @@ etag master LastChangedAt
   action deactivate;
   action reactivate;
 
+  determination setInitialStatus on modify { create; }
+
   field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
 
   field ( readonly : update ) DepartmentId;
