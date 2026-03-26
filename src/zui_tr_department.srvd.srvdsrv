@@ -1,0 +1,4 @@
+@EndUserText.label: 'Department Service Def'
+define service ZUI_TR_DEPARTMENT {
+  expose ZC_TR_DEPARTMENT;
+}
