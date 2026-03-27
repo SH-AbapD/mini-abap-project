@@ -4,7 +4,8 @@
 @Metadata.allowExtensions: true
 define root view entity ZC_TR_EMPOLYEE as projection on ZI_TR_EMPOLYEE
 {
-    key EmployeeId,
+ key EmployeeUuid,
+    EmployeeId,
     EmployeeName,
     DepartmentId,
     DepartmentName,

@@ -1,0 +1,39 @@
+managed implementation in class zbp_i_tr_empolyee unique;
+strict ( 2 );
+
+define behavior for ZI_TR_EMPOLYEE alias Emp
+persistent table ztr_employee
+lock master
+authorization master ( global )
+etag master LastChangedAt
+{
+  create ( authorization : global );
+  update;
+
+  action deactivate;
+  action reactivate;
+
+  determination setInitialStatus on modify { create; }
+  determination setEmployeeId on modify { create; }
+
+  field ( numbering : managed, readonly ) EmployeeUuid;
+
+  field ( readonly ) EmployeeId, CreatedAt, CreatedBy, LastChangedAt,
+  LastChangedBy, IsActive;
+
+  mapping for ztr_employee
+    {
+      EmployeeUuid   = employee_uuid;
+      EmployeeId     = employee_id;
+      EmployeeName   = employee_name;
+      DepartmentId   = department_id;
+      DepartmentName = department_name;
+      PositionName   = position_name;
+      Email          = email;
+      CreatedAt      = created_at;
+      CreatedBy      = created_by;
+      LastChangedAt  = last_changed_at;
+      LastChangedBy  = last_changed_by;
+      IsActive       = is_active;
+    }
+}

@@ -1,0 +1,230 @@
+CLASS lhc_Emp DEFINITION INHERITING FROM cl_abap_behavior_handler.
+  PRIVATE SECTION.
+
+    METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
+      IMPORTING REQUEST requested_authorizations FOR Emp RESULT result.
+
+    METHODS setInitialStatus FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Emp~setInitialStatus.
+
+    METHODS deactivate FOR MODIFY
+      IMPORTING keys FOR ACTION Emp~deactivate.
+
+    METHODS reactivate FOR MODIFY
+      IMPORTING keys FOR ACTION Emp~reactivate.
+
+    METHODS setEmployeeId FOR DETERMINE ON MODIFY
+      IMPORTING keys FOR Emp~setEmployeeId.
+
+ENDCLASS.
+
+CLASS lhc_Emp IMPLEMENTATION.
+
+  METHOD get_global_authorizations.
+
+    DATA lv_is_admin TYPE abap_bool.
+
+    lv_is_admin = xsdbool( sy-uname = 'ADMIN' OR sy-uname = 'CB9980003740' ).
+
+    IF requested_authorizations-%create = if_abap_behv=>mk-on.
+      result-%create = COND #(
+        WHEN lv_is_admin = abap_true
+        THEN if_abap_behv=>auth-allowed
+        ELSE if_abap_behv=>auth-unauthorized
+       ).
+    ENDIF.
+
+    IF requested_authorizations-%update = if_abap_behv=>mk-on.
+      result-%update = COND #(
+        WHEN lv_is_admin = abap_true
+        THEN if_abap_behv=>auth-allowed
+        ELSE if_abap_behv=>auth-unauthorized
+       ).
+    ENDIF.
+
+    IF requested_authorizations-%action-deactivate = if_abap_behv=>mk-on.
+      result-%action-deactivate = COND #(
+        WHEN lv_is_admin = abap_true
+        THEN if_abap_behv=>auth-allowed
+        ELSE if_abap_behv=>auth-unauthorized
+       ).
+    ENDIF.
+
+    IF requested_authorizations-%action-reactivate = if_abap_behv=>mk-on.
+      result-%action-reactivate = COND #(
+        WHEN lv_is_admin = abap_true
+        THEN if_abap_behv=>auth-allowed
+        ELSE if_abap_behv=>auth-unauthorized
+      ).
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD setinitialstatus.
+
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee\\Emp.
+
+    READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        FIELDS ( IsActive )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_emp).
+
+    LOOP AT lt_emp INTO DATA(ls_emp).
+      IF ls_emp-IsActive IS INITIAL.
+        APPEND VALUE #(
+          %tky     = ls_emp-%tky
+          IsActive = 'A'
+        ) TO lt_update.
+      ENDIF.
+    ENDLOOP.
+
+    IF lt_update IS NOT INITIAL.
+      MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        UPDATE FIELDS ( IsActive )
+        WITH lt_update.
+    ENDIF.
+
+  ENDMETHOD.
+
+
+  METHOD deactivate.
+
+    READ ENTITIES OF zi_tr_empolyee IN  LOCAL MODE
+        ENTITY Emp
+        FIELDS ( IsActive DepartmentId )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_dept).
+
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee\\Emp.
+
+    LOOP AT lt_dept INTO DATA(ls_dept).
+      IF ls_dept-IsActive = 'N'.
+        APPEND VALUE #( %tky = ls_dept-%tky ) TO failed-emp.
+
+        APPEND VALUE #(
+          %tky = ls_dept-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-error
+                   text     = |사원 { ls_dept-DepartmentId } 는 이미 비활성 상태입니다.| )
+        ) TO reported-emp.
+
+        CONTINUE.
+      ENDIF.
+
+      APPEND VALUE #(
+        %tky     = ls_dept-%tky
+        IsActive = 'N'
+      ) TO lt_update.
+
+    ENDLOOP.
+
+    IF lt_update IS NOT INITIAL.
+      MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        UPDATE FIELDS ( IsActive )
+        WITH lt_update
+        FAILED DATA(lt_failed)
+        REPORTED DATA(lt_reported).
+
+      APPEND LINES OF lt_failed-emp TO failed-emp.
+      APPEND LINES OF lt_reported-emp TO reported-emp.
+
+      LOOP AT lt_update INTO DATA(ls_update).
+        APPEND VALUE #(
+          %tky = ls_update-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-success
+                   text     = |사원이 정상적으로 비활성화되었습니다.| )
+        ) TO reported-emp.
+      ENDLOOP.
+    ENDIF.
+  ENDMETHOD.
+
+  METHOD reactivate.
+
+    READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+      ENTITY Emp
+      FIELDS ( IsActive DepartmentId )
+      WITH CORRESPONDING #( keys )
+      RESULT DATA(lt_dept).
+
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee\\Emp.
+
+    LOOP AT lt_dept INTO DATA(ls_dept).
+      IF ls_dept-IsActive = 'A'.
+        APPEND VALUE #( %tky = ls_dept-%tky ) TO failed-emp.
+
+        APPEND VALUE #(
+          %tky = ls_dept-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-error
+                   text     = |사원 { ls_dept-DepartmentId } 는 이미 활성 상태입니다.| )
+        ) TO reported-emp.
+
+        CONTINUE.
+      ENDIF.
+
+      APPEND VALUE #(
+        %tky     = ls_dept-%tky
+        IsActive = 'A'
+      ) TO lt_update.
+
+    ENDLOOP.
+
+    IF lt_update IS NOT INITIAL.
+      MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        UPDATE FIELDS ( IsActive )
+        WITH lt_update
+        FAILED DATA(lt_failed)
+        REPORTED DATA(lt_reported).
+
+      APPEND LINES OF lt_failed-emp TO failed-emp.
+      APPEND LINES OF lt_reported-emp TO reported-emp.
+
+      LOOP AT lt_update INTO DATA(ls_update).
+        APPEND VALUE #(
+          %tky = ls_update-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-success
+                   text     = |사원이 정상적으로 활성화되었습니다.| )
+        ) TO reported-emp.
+      ENDLOOP.
+    ENDIF.
+
+  ENDMETHOD.
+
+  METHOD setEmployeeId.
+
+    READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        FIELDS ( EmployeeUuid EmployeeId )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_emp).
+
+    SELECT MAX( employee_id )
+        FROM ztr_employee
+        INTO @DATA(lv_max_id).
+
+    DATA lv_next_num TYPE i.
+
+    IF lv_max_id IS INITIAL.
+      lv_next_num = 1.
+    ELSE.
+      lv_next_num = lv_max_id+3.
+    ENDIF.
+
+    MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+      ENTITY Emp
+      UPDATE FIELDS ( EmployeeId )
+      WITH VALUE #(
+        FOR ls_emp IN lt_emp
+        WHERE ( EmployeeId IS INITIAL )
+        ( %tky       = ls_emp-%tky
+          EmployeeId = |EMP{ lv_next_num WIDTH = 4 PAD = '0' }| ) ).
+
+  ENDMETHOD.
+
+ENDCLASS.
