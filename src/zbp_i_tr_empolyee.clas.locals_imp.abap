@@ -7,11 +7,11 @@ CLASS lhc_Emp DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS setInitialStatus FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Emp~setInitialStatus.
 
-    METHODS deactivate FOR MODIFY
-      IMPORTING keys FOR ACTION Emp~deactivate.
+    METHODS deactivateEmployee FOR MODIFY
+      IMPORTING keys FOR ACTION Emp~deactivateEmployee.
 
-    METHODS reactivate FOR MODIFY
-      IMPORTING keys FOR ACTION Emp~reactivate.
+    METHODS reactivateEmployee FOR MODIFY
+      IMPORTING keys FOR ACTION Emp~reactivateEmployee.
 
     METHODS setEmployeeId FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Emp~setEmployeeId.
@@ -42,16 +42,16 @@ CLASS lhc_Emp IMPLEMENTATION.
        ).
     ENDIF.
 
-    IF requested_authorizations-%action-deactivate = if_abap_behv=>mk-on.
-      result-%action-deactivate = COND #(
+    IF requested_authorizations-%action-deactivateEmployee = if_abap_behv=>mk-on.
+      result-%action-deactivateEmployee = COND #(
         WHEN lv_is_admin = abap_true
         THEN if_abap_behv=>auth-allowed
         ELSE if_abap_behv=>auth-unauthorized
        ).
     ENDIF.
 
-    IF requested_authorizations-%action-reactivate = if_abap_behv=>mk-on.
-      result-%action-reactivate = COND #(
+    IF requested_authorizations-%action-reactivateEmployee = if_abap_behv=>mk-on.
+      result-%action-reactivateEmployee = COND #(
         WHEN lv_is_admin = abap_true
         THEN if_abap_behv=>auth-allowed
         ELSE if_abap_behv=>auth-unauthorized
@@ -89,7 +89,7 @@ CLASS lhc_Emp IMPLEMENTATION.
   ENDMETHOD.
 
 
-  METHOD deactivate.
+  METHOD deactivateEmployee.
 
     READ ENTITIES OF zi_tr_empolyee IN  LOCAL MODE
         ENTITY Emp
@@ -142,7 +142,7 @@ CLASS lhc_Emp IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
-  METHOD reactivate.
+  METHOD reactivateEmployee.
 
     READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
       ENTITY Emp

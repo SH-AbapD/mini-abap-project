@@ -3,10 +3,13 @@
 {
 "FROM":
 [
+"ZI_TR_DEPARTMENT",
 "ZTR_EMPLOYEE"
 ],
 "ASSOCIATED":
-[],
+[
+"ZI_TR_DEPARTMENT"
+],
 "BASE":
 [],
 "ANNO_REF":

@@ -10,8 +10,8 @@ etag master LastChangedAt
   create ( authorization : global );
   update;
 
-  action deactivate;
-  action reactivate;
+  action deactivateEmployee;
+  action reactivateEmployee;
 
   determination setInitialStatus on modify { create; }
   determination setEmployeeId on modify { create; }

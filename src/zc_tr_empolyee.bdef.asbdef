@@ -6,6 +6,6 @@ define behavior for ZC_TR_EMPOLYEE alias Emp
   use create;
   use update;
 
-  use action deactivate;
-  use action reactivate;
+  use action deactivateEmployee;
+  use action reactivateEmployee;
 }

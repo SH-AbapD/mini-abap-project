@@ -21,7 +21,7 @@ annotate entity ZC_TR_EMPOLYEE with
   @UI: {
     lineItem: [
       { position: 10 },
-      { position: 80, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' }
+      { position: 80, type: #FOR_ACTION, dataAction: 'deactivateEmployee', label: 'deactivateEmployee' }
     ],
     identification: [ { position: 10 } ],
     selectionField: [ { position: 10 } ]
@@ -31,7 +31,7 @@ annotate entity ZC_TR_EMPOLYEE with
   @UI: {
     lineItem: [
       { position: 20 },
-      { position: 90, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
+      { position: 90, type: #FOR_ACTION, dataAction: 'reactivateEmployee', label: 'reactivateEmployee' }
     ],
     identification: [ { position: 20 } ],
     selectionField: [ { position: 20 } ]
@@ -44,6 +44,12 @@ annotate entity ZC_TR_EMPOLYEE with
     selectionField: [ { position: 30 } ]
   }
   DepartmentId;
+
+  @UI: {
+    lineItem: [ { position: 40 } ],
+    identification: [ { position: 40 } ]
+  }
+  DepartmentName;
 
   @UI: {
     lineItem: [ { position: 50 } ],
