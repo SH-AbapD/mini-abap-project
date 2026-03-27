@@ -95,26 +95,26 @@ CLASS lhc_Emp IMPLEMENTATION.
         ENTITY Emp
         FIELDS ( IsActive DepartmentId )
         WITH CORRESPONDING #( keys )
-        RESULT DATA(lt_dept).
+        RESULT DATA(lt_emp).
 
     DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee\\Emp.
 
-    LOOP AT lt_dept INTO DATA(ls_dept).
-      IF ls_dept-IsActive = 'N'.
-        APPEND VALUE #( %tky = ls_dept-%tky ) TO failed-emp.
+    LOOP AT lt_emp INTO DATA(ls_emp).
+      IF ls_emp-IsActive = 'N'.
+        APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
 
         APPEND VALUE #(
-          %tky = ls_dept-%tky
+          %tky = ls_emp-%tky
           %msg = new_message_with_text(
                    severity = if_abap_behv_message=>severity-error
-                   text     = |사원 { ls_dept-DepartmentId } 는 이미 비활성 상태입니다.| )
+                   text     = |사원 { ls_emp-EmployeeId } 는 이미 비활성 상태입니다.| )
         ) TO reported-emp.
 
         CONTINUE.
       ENDIF.
 
       APPEND VALUE #(
-        %tky     = ls_dept-%tky
+        %tky     = ls_emp-%tky
         IsActive = 'N'
       ) TO lt_update.
 
@@ -148,26 +148,26 @@ CLASS lhc_Emp IMPLEMENTATION.
       ENTITY Emp
       FIELDS ( IsActive DepartmentId )
       WITH CORRESPONDING #( keys )
-      RESULT DATA(lt_dept).
+      RESULT DATA(lt_emp).
 
     DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee\\Emp.
 
-    LOOP AT lt_dept INTO DATA(ls_dept).
-      IF ls_dept-IsActive = 'A'.
-        APPEND VALUE #( %tky = ls_dept-%tky ) TO failed-emp.
+    LOOP AT lt_emp INTO DATA(ls_emp).
+      IF ls_emp-IsActive = 'A'.
+        APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
 
         APPEND VALUE #(
-          %tky = ls_dept-%tky
+          %tky = ls_emp-%tky
           %msg = new_message_with_text(
                    severity = if_abap_behv_message=>severity-error
-                   text     = |사원 { ls_dept-DepartmentId } 는 이미 활성 상태입니다.| )
+                   text     = |사원 { ls_emp-EmployeeId } 는 이미 활성 상태입니다.| )
         ) TO reported-emp.
 
         CONTINUE.
       ENDIF.
 
       APPEND VALUE #(
-        %tky     = ls_dept-%tky
+        %tky     = ls_emp-%tky
         IsActive = 'A'
       ) TO lt_update.
 
