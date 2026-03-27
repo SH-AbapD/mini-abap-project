@@ -8,7 +8,6 @@ define root view entity ZC_TR_EMPOLYEE as projection on ZI_TR_EMPOLYEE
     EmployeeId,
     EmployeeName,
     DepartmentId,
-    DepartmentName,
     PositionName,
     Email,
     CreatedAt,

@@ -8,7 +8,6 @@ define root view entity ZI_TR_EMPOLYEE
       employee_id     as EmployeeId,
       employee_name   as EmployeeName,
       department_id   as DepartmentId,
-      department_name as DepartmentName,
       position_name   as PositionName,
       email           as Email,
       created_at      as CreatedAt,

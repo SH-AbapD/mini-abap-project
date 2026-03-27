@@ -27,7 +27,6 @@ etag master LastChangedAt
       EmployeeId     = employee_id;
       EmployeeName   = employee_name;
       DepartmentId   = department_id;
-      DepartmentName = department_name;
       PositionName   = position_name;
       Email          = email;
       CreatedAt      = created_at;

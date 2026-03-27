@@ -46,12 +46,6 @@ annotate entity ZC_TR_EMPOLYEE with
   DepartmentId;
 
   @UI: {
-    lineItem: [ { position: 40 } ],
-    identification: [ { position: 40 } ]
-  }
-  DepartmentName;
-
-  @UI: {
     lineItem: [ { position: 50 } ],
     identification: [ { position: 50 } ]
   }
