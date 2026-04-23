@@ -6,9 +6,14 @@
 "ZI_TR_EMPOLYEE"
 ],
 "ASSOCIATED":
-[],
+[
+"ZC_TR_DEPARTMENT",
+"ZI_TR_DEPARTMENT"
+],
 "BASE":
-[],
+[
+"ZI_TR_EMPOLYEE"
+],
 "ANNO_REF":
 [],
 "SCALAR_FUNCTION":

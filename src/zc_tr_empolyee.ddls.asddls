@@ -17,6 +17,7 @@ define root view entity ZC_TR_EMPOLYEE
           }
         }
       ]
+      @ObjectModel.text.element: ['DepartmentName']
       DepartmentId,
       DepartmentName,
       PositionName,
@@ -25,5 +26,6 @@ define root view entity ZC_TR_EMPOLYEE
       CreatedBy,
       LastChangedAt,
       LastChangedBy,
-      IsActive
+      IsActive,
+      _Department: redirected to ZC_TR_DEPARTMENT
 }
