@@ -38,10 +38,8 @@ annotate entity ZC_TR_DEPARTMENT with
   DepartmentName;
 
   @UI: {
-    lineItem:       [ { position: 30 } ],
-    identification: [ { position: 30 } ]
+    lineItem:       [ { position: 30 } ]
   }
   IsActive;
   
-    
 }

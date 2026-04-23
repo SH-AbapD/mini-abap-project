@@ -15,7 +15,7 @@ etag master LastChangedAt
 
   determination setInitialStatus on modify { create; }
 
-  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy,IsActive;
 
   field ( readonly : update ) DepartmentId;
 
