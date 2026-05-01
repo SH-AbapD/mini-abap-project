@@ -42,4 +42,24 @@ annotate entity ZC_TR_DEPARTMENT with
   }
   IsActive;
   
+  @UI: {
+    identification: [ { position: 80 } ]
+  }
+  CreatedAt;
+
+  @UI: {
+    identification: [ { position: 90 } ]
+  }
+  CreatedBy;
+
+  @UI: {
+    identification: [ { position: 100 } ]
+  }
+  LastChangedAt;
+
+  @UI: {
+    identification: [ { position: 110 } ]
+  }
+  LastChangedBy;  
+  
 }

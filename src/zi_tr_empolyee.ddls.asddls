@@ -10,21 +10,20 @@ define root view entity ZI_TR_EMPOLYEE
       employee_name   as EmployeeName,
       
       @ObjectModel.text.element: ['DepartmentName']
-      @Consumption.valueHelpDefinition: [
-        {
-          entity: {
-            name: 'ZC_TR_DEPARTMENT',
-            element: 'DepartmentId'
-          }
-        }
-      ]
       department_id as DepartmentId,
       position_name   as PositionName,
       email           as Email,
+      
+      @Semantics.systemDateTime.createdAt: true
       created_at      as CreatedAt,
+      @Semantics.user.createdBy: true
       created_by      as CreatedBy,
+
+      @Semantics.systemDateTime.lastChangedAt: true
       last_changed_at as LastChangedAt,
+      @Semantics.user.lastChangedBy: true
       last_changed_by as LastChangedBy,
+      
       is_active       as IsActive,
       _Department.DepartmentName as DepartmentName,
       _Department
