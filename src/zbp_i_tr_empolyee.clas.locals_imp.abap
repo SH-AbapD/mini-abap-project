@@ -93,7 +93,7 @@ CLASS lhc_Emp IMPLEMENTATION.
 
     READ ENTITIES OF zi_tr_empolyee IN  LOCAL MODE
         ENTITY Emp
-        FIELDS ( IsActive DepartmentId )
+        FIELDS ( IsActive )
         WITH CORRESPONDING #( keys )
         RESULT DATA(lt_emp).
 
@@ -148,7 +148,7 @@ CLASS lhc_Emp IMPLEMENTATION.
 
     READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
       ENTITY Emp
-      FIELDS ( IsActive DepartmentId )
+      FIELDS ( IsActive )
       WITH CORRESPONDING #( keys )
       RESULT DATA(lt_emp).
 
