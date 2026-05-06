@@ -19,20 +19,12 @@ annotate entity ZC_TR_EMPOLYEE with
   ]
 
   @UI: {
-    lineItem: [
-      { position: 10 },
-      { position: 80, type: #FOR_ACTION, dataAction: 'deactivateEmployee', label: 'deactivateEmployee' }
-    ],
     identification: [ { position: 10 } ],
     selectionField: [ { position: 10 } ]
   }
   EmployeeId;
 
   @UI: {
-    lineItem: [
-      { position: 20 },
-      { position: 90, type: #FOR_ACTION, dataAction: 'reactivateEmployee', label: 'reactivateEmployee' }
-    ],
     identification: [ { position: 20 } ],
     selectionField: [ { position: 20 } ]
   }
@@ -64,7 +56,11 @@ annotate entity ZC_TR_EMPOLYEE with
   Email;
 
   @UI: {
-    lineItem: [ { position: 70 } ],
+    lineItem: [
+      { position: 70 },
+      { position: 80, type: #FOR_ACTION, dataAction: 'deactivateEmployee', label: 'Deactivate' },
+      { position: 90, type: #FOR_ACTION, dataAction: 'reactivateEmployee', label: 'Reactivate' }
+    ],
     identification: [ { position: 70 } ]
   }
   IsActive;
