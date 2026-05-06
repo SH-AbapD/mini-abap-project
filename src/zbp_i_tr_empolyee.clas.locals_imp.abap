@@ -217,7 +217,7 @@ CLASS lhc_Emp IMPLEMENTATION.
     IF lv_max_id IS INITIAL.
       lv_next_num = 1.
     ELSE.
-      lv_next_num = lv_max_id+3.
+      lv_next_num = lv_max_id+3 + 1.
     ENDIF.
 
     MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
