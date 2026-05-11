@@ -18,7 +18,7 @@ etag master LastChangedAt
 
   field ( numbering : managed, readonly ) EmployeeUuid;
 
-  field ( readonly ) EmployeeId, CreatedAt, CreatedBy, LastChangedAt,
+  field ( readonly ) EmployeeId, DepartmentName , CreatedAt, CreatedBy, LastChangedAt,
   LastChangedBy, IsActive;
 
   mapping for ztr_employee
