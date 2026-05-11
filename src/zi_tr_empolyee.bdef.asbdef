@@ -16,6 +16,8 @@ etag master LastChangedAt
   determination setInitialStatus on modify { create; }
   determination setEmployeeId on modify { create; }
 
+  validation validateEmail on save { create; update; }
+
   field ( numbering : managed, readonly ) EmployeeUuid;
 
   field ( readonly ) EmployeeId, DepartmentName , CreatedAt, CreatedBy, LastChangedAt,

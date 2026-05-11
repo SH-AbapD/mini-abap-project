@@ -16,6 +16,9 @@ CLASS lhc_Emp DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS setEmployeeId FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Emp~setEmployeeId.
 
+    METHODS validateEmail FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Emp~validateEmail.
+
 ENDCLASS.
 
 CLASS lhc_Emp IMPLEMENTATION.
@@ -228,6 +231,42 @@ CLASS lhc_Emp IMPLEMENTATION.
         WHERE ( EmployeeId IS INITIAL )
         ( %tky       = ls_emp-%tky
           EmployeeId = |EMP{ lv_next_num WIDTH = 4 PAD = '0' }| ) ).
+
+  ENDMETHOD.
+
+  METHOD validateemail.
+
+    READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        FIELDS ( Email )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_emp).
+
+    LOOP AT lt_emp INTO DATA(ls_emp).
+
+      IF ls_emp-Email IS INITIAL.
+        APPEND VALUE #(
+          %tky = ls_emp-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-error
+                   text     = '이메일을 입력해주세요.' )
+        ) TO reported-emp.
+        APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
+        CONTINUE.
+      ENDIF.
+
+      FIND PCRE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' IN ls_emp-Email.
+      IF sy-subrc <> 0.
+        APPEND VALUE #(
+          %tky = ls_emp-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-error
+                   text     = |올바른 이메일 형식이 아닙니다. 입력값: '{ ls_emp-Email }'| )
+        ) TO reported-emp.
+        APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
+      ENDIF.
+
+    ENDLOOP.
 
   ENDMETHOD.
 
