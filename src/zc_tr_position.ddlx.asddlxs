@@ -17,10 +17,7 @@ annotate entity ZC_TR_POSITION with
   ]
 
   @UI: {
-    lineItem: [
-      { position: 10 },
-      { position: 40, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' }
-    ],
+    lineItem: [ { position: 10 } ],
     identification: [ { position: 10 } ],
     selectionField: [ { position: 10 } ]
   }
@@ -35,7 +32,8 @@ annotate entity ZC_TR_POSITION with
   @UI: {
         lineItem: [
       { position: 30 },
-      { position: 50, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
+      { position: 50, type: #FOR_ACTION, dataAction: 'deactivatePosition', label: 'Deactivate' },
+      { position: 60, type: #FOR_ACTION, dataAction: 'reactivatePosition', label: 'Reactivate' }
     ],
     identification : [ { position: 30 } ]
   }
