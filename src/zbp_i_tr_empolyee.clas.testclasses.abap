@@ -33,7 +33,7 @@ CLASS ltcl_emp_action IMPLEMENTATION.
       employee_id     = 'EMP1001'
       employee_name   = 'Test Active'
       department_id   = 'FI'
-      position_name   = 'Tester'
+      position_id     = 'Manager'
       created_at      = lv_ts
       created_by      = sy-uname
       last_changed_at = lv_ts
@@ -47,7 +47,7 @@ CLASS ltcl_emp_action IMPLEMENTATION.
       employee_id     = 'EMP1000'
       employee_name   = 'Test Inactive'
       department_id   = 'FI'
-      position_name   = 'Tester'
+      position_id     = 'Manager'
       created_at      = lv_ts
       created_by      = sy-uname
       last_changed_at = lv_ts
