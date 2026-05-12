@@ -11,7 +11,7 @@ define root view entity ZI_TR_EMPOLYEE
       
       @ObjectModel.text.element: ['DepartmentName']
       department_id as DepartmentId,
-      position_name   as PositionName,
+      position_id   as PositionId,
       email           as Email,
       
       @Semantics.systemDateTime.createdAt: true

@@ -46,43 +46,49 @@ annotate entity ZC_TR_EMPOLYEE with
 
   @UI: {
     lineItem: [ { position: 50 } ],
-    identification: [ { position: 50 } ]
+    identification: [ { position: 50 } ],
+    selectionField: [ { position: 50 } ]
   }
-  PositionName;
+  positionid;
+  
+  @UI: {
+      lineItem: [ { position: 60 } ]
+  }
+  PositionName;  
 
   @UI: {
-    lineItem: [ { position: 60 } ],
-    identification: [ { position: 60 } ]
+    lineItem: [ { position: 70 } ],
+    identification: [ { position: 70 } ]
   }
   Email;
 
   @UI: {
     lineItem: [
-      { position: 70 },
-      { position: 80, type: #FOR_ACTION, dataAction: 'deactivateEmployee', label: 'Deactivate' },
-      { position: 90, type: #FOR_ACTION, dataAction: 'reactivateEmployee', label: 'Reactivate' }
+      { position: 80 },
+      { position: 90, type: #FOR_ACTION, dataAction: 'deactivateEmployee', label: 'Deactivate' },
+      { position: 100, type: #FOR_ACTION, dataAction: 'reactivateEmployee', label: 'Reactivate' }
     ],
-    identification: [ { position: 70 } ]
+    identification: [ { position: 80 } ]
   }
   IsActive;
 
   @UI: {
-    identification: [ { position: 80 } ]
+    identification: [ { position: 90 } ]
   }
   CreatedAt;
 
   @UI: {
-    identification: [ { position: 90 } ]
+    identification: [ { position: 100 } ]
   }
   CreatedBy;
 
   @UI: {
-    identification: [ { position: 100 } ]
+    identification: [ { position: 110 } ]
   }
   LastChangedAt;
 
   @UI: {
-    identification: [ { position: 110 } ]
+    identification: [ { position: 120 } ]
   }
   LastChangedBy;
 
