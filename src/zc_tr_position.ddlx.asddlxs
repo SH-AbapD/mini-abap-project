@@ -1,0 +1,55 @@
+@Metadata.layer: #CORE
+@UI.headerInfo: {
+    typeName: 'Position',
+    typeNamePlural: 'Positions',
+    title: { value: 'PositionName' }
+}
+annotate entity ZC_TR_POSITION with
+{
+  @UI.facet: [
+    {
+      id: 'GeneralInfo',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10
+    }
+  ]
+
+  @UI: {
+    lineItem: [
+      { position: 10 },
+      { position: 40, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' }
+    ],
+    identification: [ { position: 10 } ],
+    selectionField: [ { position: 10 } ]
+  }
+  PositionId;
+
+  @UI: {
+    identification: [ { position: 20 } ],
+    selectionField: [ { position: 20 } ]
+  }
+  PositionName;
+
+  @UI: {
+        lineItem: [
+      { position: 30 },
+      { position: 50, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
+    ],
+    identification : [ { position: 30 } ]
+  }
+  IsActive;
+
+  @UI: { identification: [ { position: 80 } ] }
+  CreatedAt;
+
+  @UI: { identification: [ { position: 90 } ] }
+  CreatedBy;
+
+  @UI: { identification: [ { position: 100 } ] }
+  LastChangedAt;
+
+  @UI: { identification: [ { position: 110 } ] }
+  LastChangedBy;
+}

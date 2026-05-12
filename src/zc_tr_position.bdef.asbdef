@@ -1,0 +1,11 @@
+projection;
+strict ( 2 );
+
+define behavior for ZC_TR_POSITION alias Pos
+{
+  use create;
+  use update;
+
+  use action deactivate;
+  use action reactivate;
+}

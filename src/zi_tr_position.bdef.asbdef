@@ -1,0 +1,32 @@
+managed implementation in class zbp_i_tr_position unique;
+strict ( 2 );
+
+define behavior for ZI_TR_POSITION alias Pos
+persistent table ztr_position
+lock master
+authorization master ( global )
+etag master LastChangedAt
+{
+  create;
+  update;
+
+  action deactivate;
+  action reactivate;
+
+  determination setInitialStatus on modify { create; }
+
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
+  field ( readonly : update ) PositionId;
+
+  mapping for ztr_position
+    {
+      PositionId    = position_id;
+      PositionName  = position_name;
+      CreatedAt     = created_at;
+      CreatedBy     = created_by;
+      LastChangedAt = last_changed_at;
+      LastChangedBy = last_changed_by;
+      IsActive      = is_active;
+    }
+
+}
