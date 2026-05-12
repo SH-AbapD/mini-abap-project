@@ -20,12 +20,28 @@ define root view entity ZC_TR_EMPOLYEE
       @ObjectModel.text.element: ['DepartmentName']
       DepartmentId,
       DepartmentName,
+
+      @Consumption.valueHelpDefinition: [
+      {
+          entity: {
+            name: 'ZC_TR_POSITION',
+            element: 'PositionId'
+          }
+        }
+      ]
+      @ObjectModel.text.element: ['PositionName']
       PositionId,
+      PositionName,
       Email,
+      
       CreatedAt,
       CreatedBy,
+      
       LastChangedAt,
       LastChangedBy,
+      
       IsActive,
-      _Department: redirected to ZC_TR_DEPARTMENT
+      
+      _Department : redirected to ZC_TR_DEPARTMENT,
+      _Position   : redirected to ZC_TR_POSITION
 }

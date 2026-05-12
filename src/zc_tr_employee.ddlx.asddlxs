@@ -49,7 +49,7 @@ annotate entity ZC_TR_EMPOLYEE with
     identification: [ { position: 50 } ],
     selectionField: [ { position: 50 } ]
   }
-  positionid;
+  PositionId;
   
   @UI: {
       lineItem: [ { position: 60 } ]
