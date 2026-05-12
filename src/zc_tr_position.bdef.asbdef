@@ -6,6 +6,6 @@ define behavior for ZC_TR_POSITION alias Pos
   use create;
   use update;
 
-  use action deactivate;
-  use action reactivate;
+  use action deactivatePosition;
+  use action reactivatePosition;
 }

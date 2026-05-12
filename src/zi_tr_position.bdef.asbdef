@@ -10,8 +10,8 @@ etag master LastChangedAt
   create;
   update;
 
-  action deactivate;
-  action reactivate;
+  action deactivatePosition;
+  action reactivatePosition;
 
   determination setInitialStatus on modify { create; }
 

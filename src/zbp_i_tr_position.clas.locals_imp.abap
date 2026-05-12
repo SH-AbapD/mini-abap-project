@@ -4,11 +4,11 @@ CLASS lhc_Pos DEFINITION INHERITING FROM cl_abap_behavior_handler.
     METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
       IMPORTING REQUEST requested_authorizations FOR Pos RESULT result.
 
-    METHODS deactivate FOR MODIFY
-      IMPORTING keys FOR ACTION Pos~deactivate.
+    METHODS deactivatePosition FOR MODIFY
+      IMPORTING keys FOR ACTION Pos~deactivatePosition.
 
-    METHODS reactivate FOR MODIFY
-      IMPORTING keys FOR ACTION Pos~reactivate.
+    METHODS reactivatePosition FOR MODIFY
+      IMPORTING keys FOR ACTION Pos~reactivatePosition.
 
     METHODS setInitialStatus FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Pos~setInitialStatus.
@@ -39,16 +39,16 @@ CLASS lhc_Pos IMPLEMENTATION.
        ).
     ENDIF.
 
-    IF requested_authorizations-%action-deactivate = if_abap_behv=>mk-on.
-      result-%action-deactivate = COND #(
+    IF requested_authorizations-%action-deactivatePosition = if_abap_behv=>mk-on.
+      result-%action-deactivatePosition = COND #(
         WHEN lv_is_admin = abap_true
         THEN if_abap_behv=>auth-allowed
         ELSE if_abap_behv=>auth-unauthorized
        ).
     ENDIF.
 
-    IF requested_authorizations-%action-reactivate = if_abap_behv=>mk-on.
-      result-%action-reactivate = COND #(
+    IF requested_authorizations-%action-reactivatePosition = if_abap_behv=>mk-on.
+      result-%action-reactivatePosition = COND #(
         WHEN lv_is_admin = abap_true
         THEN if_abap_behv=>auth-allowed
         ELSE if_abap_behv=>auth-unauthorized
@@ -57,7 +57,7 @@ CLASS lhc_Pos IMPLEMENTATION.
 
   ENDMETHOD.
 
-  METHOD deactivate.
+  METHOD deactivatePosition.
 
     READ ENTITIES OF zi_tr_position IN  LOCAL MODE
         ENTITY Pos
@@ -110,7 +110,7 @@ CLASS lhc_Pos IMPLEMENTATION.
     ENDIF.
   ENDMETHOD.
 
-  METHOD reactivate.
+  METHOD reactivatePosition.
 
     READ ENTITIES OF zi_tr_position IN LOCAL MODE
       ENTITY Pos
