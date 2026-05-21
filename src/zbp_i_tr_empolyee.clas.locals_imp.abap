@@ -27,7 +27,7 @@ CLASS lhc_Emp IMPLEMENTATION.
 
     DATA lv_is_admin TYPE abap_bool.
 
-    lv_is_admin = xsdbool( sy-uname = 'ADMIN' OR sy-uname = 'CB9980003740' ).
+    lv_is_admin = xsdbool( sy-uname = 'ADMIN' OR sy-uname = 'CB9980000379' ).
 
     IF requested_authorizations-%create = if_abap_behv=>mk-on.
       result-%create = COND #(
