@@ -3,4 +3,5 @@ define service ZUI_TR_EMPLOYEE {
   expose ZC_TR_EMPOLYEE;
   expose ZC_TR_DEPARTMENT;
   expose ZC_TR_POSITION;
+  expose ZC_TR_REQ_TYPE;
 }

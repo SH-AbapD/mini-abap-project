@@ -1,0 +1,31 @@
+managed implementation in class zbp_i_tr_req_type unique;
+strict ( 2 );
+
+define behavior for ZI_TR_REQ_TYPE alias ReqType
+persistent table ztr_req_type
+lock master
+authorization master ( global )
+etag master LastChangedAt
+{
+  create ( authorization : global );
+  update;
+
+  action deactivateReqType;
+  action reactivateReqType;
+
+  determination setInitialStatus on modify { create; }
+
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
+  field ( readonly : update ) RequestTypeId;
+
+  mapping for ztr_req_type
+    {
+       RequestTypeId    = request_type_id;
+       RequestTypeName  = request_type_name;
+       CreatedAt        = created_at;
+       CreatedBy        = created_by;
+       LastChangedAt    = last_changed_at;
+       LastChangedBy    = last_changed_by;
+       IsActive         = is_active;
+    }
+}

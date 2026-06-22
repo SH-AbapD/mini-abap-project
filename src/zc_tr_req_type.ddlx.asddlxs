@@ -1,0 +1,49 @@
+@Metadata.layer: #CORE
+annotate entity ZC_TR_REQ_TYPE with
+{
+  @UI.facet: [
+    {
+      id: 'GeneralInfo',
+      purpose: #STANDARD,
+      type: #IDENTIFICATION_REFERENCE,
+      label: 'General Information',
+      position: 10
+    }
+  ]
+
+  @UI: {
+    lineItem: [ { position: 10 } ],
+    identification: [ { position: 10 } ],
+    selectionField: [ { position: 10 } ]
+  }
+  RequestTypeId;
+
+  @UI: {
+    lineItem: [ { position: 20 } ],
+    identification: [ { position: 20 } ],
+    selectionField: [ { position: 20 } ]
+  }
+  RequestTypeName;
+
+  @UI: {
+    lineItem: [
+      { position: 30 },
+      { position: 40, type: #FOR_ACTION, dataAction: 'deactivateReqType', label: 'Deactivate' },
+      { position: 50, type: #FOR_ACTION, dataAction: 'reactivateReqType', label: 'Reactivate' }
+    ],
+    identification: [ { position: 30 } ]
+  }
+  IsActive;
+
+  @UI: { identification: [ { position: 80 } ] }
+  CreatedAt;
+
+  @UI: { identification: [ { position: 90 } ] }
+  CreatedBy;
+
+  @UI: { identification: [ { position: 100 } ] }
+  LastChangedAt;
+
+  @UI: { identification: [ { position: 110 } ] }
+  LastChangedBy;
+}
