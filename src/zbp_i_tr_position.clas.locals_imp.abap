@@ -100,12 +100,14 @@ CLASS lhc_Pos IMPLEMENTATION.
       APPEND LINES OF lt_reported-pos TO reported-pos.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        APPEND VALUE #(
-          %tky = ls_update-%tky
-          %msg = new_message_with_text(
-                   severity = if_abap_behv_message=>severity-success
-                   text     = |직급이 정상적으로 비활성화되었습니다.| )
-        ) TO reported-pos.
+        IF NOT line_exists( lt_failed-pos[ %tky = ls_update-%tky ] ).
+          APPEND VALUE #(
+            %tky = ls_update-%tky
+            %msg = new_message_with_text(
+                     severity = if_abap_behv_message=>severity-success
+                     text     = |직급이 정상적으로 비활성화되었습니다.| )
+          ) TO reported-pos.
+        ENDIF.
       ENDLOOP.
     ENDIF.
   ENDMETHOD.
@@ -153,12 +155,14 @@ CLASS lhc_Pos IMPLEMENTATION.
       APPEND LINES OF lt_reported-pos TO reported-pos.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        APPEND VALUE #(
-          %tky = ls_update-%tky
-          %msg = new_message_with_text(
-                   severity = if_abap_behv_message=>severity-success
-                   text     = |직급이 정상적으로 활성화되었습니다.| )
-        ) TO reported-pos.
+        IF NOT line_exists( lt_failed-pos[ %tky = ls_update-%tky ] ).
+          APPEND VALUE #(
+            %tky = ls_update-%tky
+            %msg = new_message_with_text(
+                     severity = if_abap_behv_message=>severity-success
+                     text     = |직급이 정상적으로 활성화되었습니다.| )
+          ) TO reported-pos.
+        ENDIF.
       ENDLOOP.
     ENDIF.
 

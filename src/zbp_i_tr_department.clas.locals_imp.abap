@@ -128,12 +128,14 @@ CLASS lhc_Dept IMPLEMENTATION.
       APPEND LINES OF lt_reported-dept TO reported-dept.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        APPEND VALUE #(
-          %tky = ls_update-%tky
-          %msg = new_message_with_text(
-                   severity = if_abap_behv_message=>severity-success
-                   text     = |부서가 정상적으로 비활성화되었습니다.| )
-        ) TO reported-dept.
+        IF NOT line_exists( lt_failed-dept[ %tky = ls_update-%tky ] ).
+          APPEND VALUE #(
+            %tky = ls_update-%tky
+            %msg = new_message_with_text(
+                     severity = if_abap_behv_message=>severity-success
+                     text     = |부서가 정상적으로 비활성화되었습니다.| )
+          ) TO reported-dept.
+        ENDIF.
       ENDLOOP.
     ENDIF.
   ENDMETHOD.
@@ -181,12 +183,14 @@ CLASS lhc_Dept IMPLEMENTATION.
       APPEND LINES OF lt_reported-dept TO reported-dept.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        APPEND VALUE #(
-          %tky = ls_update-%tky
-          %msg = new_message_with_text(
-                   severity = if_abap_behv_message=>severity-success
-                   text     = |부서가 정상적으로 활성화되었습니다.| )
-        ) TO reported-dept.
+        IF NOT line_exists( lt_failed-dept[ %tky = ls_update-%tky ] ).
+          APPEND VALUE #(
+            %tky = ls_update-%tky
+            %msg = new_message_with_text(
+                     severity = if_abap_behv_message=>severity-success
+                     text     = |부서가 정상적으로 활성화되었습니다.| )
+          ) TO reported-dept.
+        ENDIF.
       ENDLOOP.
     ENDIF.
 
