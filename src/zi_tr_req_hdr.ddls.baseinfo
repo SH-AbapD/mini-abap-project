@@ -6,7 +6,10 @@
 "ZTR_REQ_HDR"
 ],
 "ASSOCIATED":
-[],
+[
+"ZI_TR_EMPOLYEE",
+"ZI_TR_REQ_TYPE"
+],
 "BASE":
 [],
 "ANNO_REF":

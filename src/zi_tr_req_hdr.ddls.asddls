@@ -3,6 +3,8 @@
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_TR_REQ_HDR
   as select from ztr_req_hdr
+  association [1..1] to ZI_TR_REQ_TYPE as _RequestType on $projection.RequestTypeId = _RequestType.RequestTypeId
+  association [1..1] to ZI_TR_EMPOLYEE  as _Employee    on $projection.EmployeeId    = _Employee.EmployeeId
 {
   key request_uuid    as RequestUuid,
       employee_id     as EmployeeId,
@@ -23,6 +25,8 @@ define root view entity ZI_TR_REQ_HDR
       @Semantics.systemDateTime.lastChangedAt: true
       last_changed_at as LastChangedAt,
       @Semantics.user.lastChangedBy: true
-      last_changed_by as LastChangedBy
-
+      last_changed_by as LastChangedBy,
+      
+      _RequestType,
+      _Employee
 }
