@@ -105,12 +105,13 @@ CLASS lhc_Req IMPLEMENTATION.
 
     MODIFY ENTITIES OF zi_tr_req_hdr IN LOCAL MODE
      ENTITY Req
-     UPDATE FIELDS ( Status ProcessedAt )
+     UPDATE FIELDS ( Status ProcessedAt ProcessedId )
      WITH VALUE #(
          FOR key IN keys (
              %tky = key-%tky
              Status = 'A'
              ProcessedAt = lv_processed_at
+             ProcessedId = sy-uname
           )
        ).
   ENDMETHOD.
@@ -135,12 +136,14 @@ CLASS lhc_Req IMPLEMENTATION.
 
     MODIFY ENTITIES OF zi_tr_req_hdr IN LOCAL MODE
      ENTITY Req
-     UPDATE FIELDS ( Status ProcessedAt )
+     UPDATE FIELDS ( Status ProcessedAt ProcessedId RejectReason )
      WITH VALUE #(
          FOR key IN keys (
              %tky = key-%tky
              Status = 'R'
              ProcessedAt = lv_processed_at
+             ProcessedId = sy-uname
+             RejectReason = key-%param-reject_reason
           )
        ).
 
