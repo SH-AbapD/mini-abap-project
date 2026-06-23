@@ -119,7 +119,7 @@ CLASS lhc_ReqType IMPLEMENTATION.
       WITH CORRESPONDING #( keys )
       RESULT DATA(lt_reqType).
 
-    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_req_type\\ReqType.
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_req_type.
 
     LOOP AT lt_reqType INTO DATA(ls_reqType).
       IF ls_reqType-IsActive = 'A'.
@@ -168,11 +168,12 @@ CLASS lhc_ReqType IMPLEMENTATION.
   ENDMETHOD.
 
   METHOD setInitialStatus.
-    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_req_type\\ReqType.
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_req_type.
+    DATA ls_update LIKE LINE OF lt_update.
 
     READ ENTITIES OF zi_tr_req_type IN LOCAL MODE
         ENTITY ReqType
-        FIELDS ( IsActive )
+        FIELDS ( IsActive RequestTypeId )
         WITH CORRESPONDING #( keys )
         RESULT DATA(lt_reqType).
 
@@ -187,10 +188,11 @@ CLASS lhc_ReqType IMPLEMENTATION.
 
     IF lt_update IS NOT INITIAL.
       MODIFY ENTITIES OF zi_tr_req_type IN LOCAL MODE
-        ENTITY ReqType
-        UPDATE FIELDS ( IsActive )
-        WITH lt_update.
+          ENTITY ReqType
+          UPDATE FIELDS ( IsActive )
+          WITH lt_update.
     ENDIF.
+
   ENDMETHOD.
 
 ENDCLASS.
