@@ -1,67 +1,87 @@
 @Metadata.layer: #CORE
-annotate view ZC_TR_REQ_HDR with
+@UI.headerInfo: {
+    typeName: 'Request',
+    typeNamePlural: 'Requests',
+    title: { value: 'Title' },
+    description: { value: 'Status' }
+}
+annotate entity ZC_TR_REQ_HDR with
 {
   @UI.facet: [
     {
-      id: 'BasicInfo',
-      type: #IDENTIFICATION_REFERENCE,
-      label: '기본 정보',
+      id:       'GeneralInfo',
+      purpose:  #STANDARD,
+      type:     #IDENTIFICATION_REFERENCE,
+      label:    'General Information',
       position: 10
     }
   ]
 
-  @UI.lineItem: [{ position: 10 }]
-  @UI.identification: [{ position: 10 }]
-  RequestUuid;
-
-  @UI.lineItem: [{ position: 20 }]
-  @UI.identification: [{ position: 20 }]
-  @UI.selectionField: [{ position: 10 }]
+  @UI: {
+    lineItem:      [ { position: 10 } ],
+    identification: [ { position: 10 } ],
+    selectionField: [ { position: 10 } ]
+  }
   EmployeeId;
 
-  @UI.lineItem: [{ position: 30 }]
-  @UI.identification: [{ position: 30 }]
-  @UI.selectionField: [{ position: 20 }]
+  @UI: {
+    lineItem:      [ { position: 20 } ],
+    identification: [ { position: 20 } ],
+    selectionField: [ { position: 20 } ]
+  }
   RequestTypeId;
 
-  @UI.lineItem: [{ position: 40 }]
-  @UI.identification: [{ position: 40 }]
+  @UI: {
+    lineItem:      [ { position: 30 } ],
+    identification: [ { position: 30 } ]
+  }
   Title;
 
-  @UI.lineItem: [{ position: 50 }]
-  @UI.identification: [{ position: 50 }]
+  @UI: {
+    lineItem:      [ { position: 40 } ],
+    identification: [ { position: 40 } ]
+  }
   RequestContent;
 
-  @UI.lineItem: [{ position: 60 }]
-  @UI.identification: [{ position: 60 }]
-  @UI.selectionField: [{ position: 30 }]
+  @UI: {
+    lineItem:      [ { position: 50 } ],
+    identification: [ { position: 50 } ]
+  }
   RequestDate;
 
-  @UI.lineItem: [{ position: 70 }]
-  @UI.identification: [{ position: 70 }]
-  @UI.selectionField: [{ position: 40 }]
+  @UI: {
+    lineItem: [
+      { position: 60 },
+      { position: 70, type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
+      { position: 80, type: #FOR_ACTION, dataAction: 'reject',  label: 'Reject'  },
+      { position: 90, type: #FOR_ACTION, dataAction: 'cancel',  label: 'Cancel'  }
+    ],
+    identification: [ { position: 60 } ]
+  }
   Status;
 
-  @UI.lineItem: [{ position: 80 }]
-  @UI.identification: [{ position: 80 }]
+  @UI: {
+    identification: [ { position: 70 } ]
+  }
   ProcessedId;
 
-  @UI.lineItem: [{ position: 90 }]
-  @UI.identification: [{ position: 90 }]
+  @UI: {
+    identification: [ { position: 80 } ]
+  }
   ProcessedAt;
 
-  @UI.identification: [{ position: 100 }]
+  @UI: {
+    identification: [ { position: 90 } ]
+  }
   RejectReason;
 
-  @UI.identification: [{ position: 110 }]
+  @UI: {
+    identification: [ { position: 100 } ]
+  }
   CreatedAt;
 
-  @UI.identification: [{ position: 120 }]
+  @UI: {
+    identification: [ { position: 110 } ]
+  }
   CreatedBy;
-
-  @UI.identification: [{ position: 130 }]
-  LastChangedAt;
-
-  @UI.identification: [{ position: 140 }]
-  LastChangedBy;
 }
