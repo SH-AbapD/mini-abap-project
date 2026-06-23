@@ -16,6 +16,8 @@ etag master LastChangedAt
 
   determination setInitialStatus on modify { create; }
 
+  validation validateRequestDate on save { create; update; }
+
   field ( numbering : managed, readonly ) RequestUuid;
 
   field ( readonly )

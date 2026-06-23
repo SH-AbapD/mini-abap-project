@@ -18,6 +18,8 @@ CLASS lhc_Req DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS setInitialStatus FOR DETERMINE ON MODIFY
       IMPORTING keys FOR Req~setInitialStatus.
+    METHODS validateRequestDate FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Req~validateRequestDate.
 
 ENDCLASS.
 
@@ -69,7 +71,7 @@ CLASS lhc_Req IMPLEMENTATION.
 
     DATA lv_is_admin TYPE abap_bool.
 
-    lv_is_admin = xsdbool( sy-uname = 'ADMIN' or sy-uname = 'CB9980000379' ).
+    lv_is_admin = xsdbool( sy-uname = 'ADMIN' OR sy-uname = 'CB9980000379' ).
 
     IF requested_authorizations-%create = if_abap_behv=>mk-on.
       result-%create = if_abap_behv=>auth-allowed.
@@ -160,6 +162,31 @@ CLASS lhc_Req IMPLEMENTATION.
                 Status = 'P'
              )
          ).
+
+  ENDMETHOD.
+
+  METHOD validateRequestDate.
+
+    READ ENTITIES OF zi_tr_req_hdr IN LOCAL MODE
+        ENTITY Req
+        FIELDS ( RequestDate )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_req).
+
+    LOOP AT lt_req INTO DATA(ls_req).
+      IF ls_req-RequestDate < cl_abap_context_info=>get_system_date( ).
+
+        APPEND VALUE #( %tky = ls_req-%tky ) TO failed-req.
+
+        APPEND VALUE #(
+           %tky = ls_req-%tky
+           %msg = new_message_with_text(
+                severity = if_abap_behv_message=>severity-error
+                text = '요청일은 오늘 이후 날짜여야 합니다.'
+           )
+         ) TO reported-req.
+      ENDIF.
+    ENDLOOP.
 
   ENDMETHOD.
 
