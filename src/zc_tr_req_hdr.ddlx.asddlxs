@@ -23,65 +23,72 @@ annotate entity ZC_TR_REQ_HDR with
     selectionField: [ { position: 10 } ]
   }
   EmployeeId;
-
-  @UI: {
+  
+  @UI: { 
     lineItem:      [ { position: 20 } ],
     identification: [ { position: 20 } ],
     selectionField: [ { position: 20 } ]
-  }
-  RequestTypeId;
+ }
+  EmployeeName;
 
   @UI: {
     lineItem:      [ { position: 30 } ],
-    identification: [ { position: 30 } ]
+    identification: [ { position: 30 } ],
+    selectionField: [ { position: 30 } ]
   }
-  Title;
+  RequestTypeId;
 
   @UI: {
     lineItem:      [ { position: 40 } ],
     identification: [ { position: 40 } ]
   }
-  RequestContent;
+  Title;
 
   @UI: {
     lineItem:      [ { position: 50 } ],
     identification: [ { position: 50 } ]
   }
+  RequestContent;
+
+  @UI: {
+    lineItem:      [ { position: 60 } ],
+    identification: [ { position: 60 } ]
+  }
   RequestDate;
 
   @UI: {
     lineItem: [
-      { position: 60 },
-      { position: 70, type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
-      { position: 80, type: #FOR_ACTION, dataAction: 'reject',  label: 'Reject'  },
-      { position: 90, type: #FOR_ACTION, dataAction: 'cancel',  label: 'Cancel'  }
+      { position: 70 },
+      { position: 80, type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
+      { position: 90, type: #FOR_ACTION, dataAction: 'reject',  label: 'Reject'  },
+      { position: 100, type: #FOR_ACTION, dataAction: 'cancel',  label: 'Cancel'  }
     ],
-    identification: [ { position: 60 } ]
+    identification: [ { position: 70 } ]
   }
   Status;
 
   @UI: {
-    identification: [ { position: 70 } ]
+    identification: [ { position: 80 } ]
   }
   ProcessedId;
 
   @UI: {
-    identification: [ { position: 80 } ]
+    identification: [ { position: 90 } ]
   }
   ProcessedAt;
 
   @UI: {
-    identification: [ { position: 90 } ]
+    identification: [ { position: 100 } ]
   }
   RejectReason;
 
   @UI: {
-    identification: [ { position: 100 } ]
+    identification: [ { position: 110 } ]
   }
   CreatedAt;
 
   @UI: {
-    identification: [ { position: 110 } ]
+    identification: [ { position: 120 } ]
   }
   CreatedBy;
 }

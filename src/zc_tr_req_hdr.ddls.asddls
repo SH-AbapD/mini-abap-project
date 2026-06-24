@@ -14,7 +14,8 @@ define root view entity ZC_TR_REQ_HDR
         }
       }]
       EmployeeId,
-      
+     _Employee.EmployeeName,
+
       @Consumption.valueHelpDefinition: [{
         entity: {
           name:    'ZC_TR_REQ_TYPE',
