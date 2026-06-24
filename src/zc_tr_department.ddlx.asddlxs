@@ -18,30 +18,27 @@ annotate entity ZC_TR_DEPARTMENT with
   ]
 
   @UI: {
-    lineItem: [
-      { position: 10 },
-      { position: 40, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' }
-    ],
+    lineItem: [ { position: 10 } ],
     identification: [ { position: 10 } ],
     selectionField: [ { position: 10 } ]
   }
   DepartmentId;
 
   @UI: {
-    lineItem: [
-      { position: 20 },
-      { position: 50, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
-    ],
+    lineItem: [ { position: 20 } ],
     identification: [ { position: 20 } ],
     selectionField: [ { position: 20 } ]
   }
   DepartmentName;
 
   @UI: {
-    lineItem:       [ { position: 30 } ]
+    lineItem:       [ { position: 30 },
+      { position: 40, type: #FOR_ACTION, dataAction: 'deactivate', label: 'Deactivate' },
+      { position: 50, type: #FOR_ACTION, dataAction: 'reactivate', label: 'Reactivate' }
+           ]
   }
   IsActive;
-  
+
   @UI: {
     identification: [ { position: 80 } ]
   }
@@ -60,6 +57,6 @@ annotate entity ZC_TR_DEPARTMENT with
   @UI: {
     identification: [ { position: 110 } ]
   }
-  LastChangedBy;  
-  
+  LastChangedBy;
+
 }
