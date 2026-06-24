@@ -6,15 +6,15 @@ define root view entity ZC_TR_REQ_HDR
   as projection on ZI_TR_REQ_HDR
 {
   key RequestUuid,
-  
+
       @Consumption.valueHelpDefinition: [{
-        entity: {
-          name:    'ZC_TR_EMPOLYEE',
-          element: 'EmployeeId'
-        }
+      entity: {
+        name:    'ZC_TR_EMPOLYEE',
+        element: 'EmployeeId'
+      }
       }]
       EmployeeId,
-     _Employee.EmployeeName,
+      _Employee.EmployeeName,
 
       @Consumption.valueHelpDefinition: [{
         entity: {
@@ -23,7 +23,7 @@ define root view entity ZC_TR_REQ_HDR
         }
       }]
       RequestTypeId,
-      
+
       Title,
       RequestContent,
       RequestDate,

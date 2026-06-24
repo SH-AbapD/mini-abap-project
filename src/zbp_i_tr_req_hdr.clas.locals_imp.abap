@@ -59,7 +59,7 @@ CLASS lhc_Req IMPLEMENTATION.
 
       IF requested_authorizations-%action-cancel = if_abap_behv=>mk-on.
         <r>-%action-cancel = COND #(
-          WHEN ls_req-Status = 'P'
+          WHEN ls_req-Status = 'P' and ls_req-CreatedBy = sy-uname
           THEN if_abap_behv=>auth-allowed
           ELSE if_abap_behv=>auth-unauthorized ).
       ENDIF.
