@@ -28,7 +28,7 @@ CLASS lhc_Req IMPLEMENTATION.
   METHOD get_instance_authorizations.
     READ ENTITIES OF zi_tr_req_hdr IN LOCAL MODE
         ENTITY Req
-        FIELDS ( Status )
+        FIELDS ( Status CreatedBy )
         WITH CORRESPONDING #( keys )
         RESULT DATA(lt_req).
 
