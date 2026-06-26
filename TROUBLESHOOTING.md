@@ -14,7 +14,7 @@ RAP에서 기본키 필드는 한번 정해지면 바뀌지 않는 값으로 취
 
 **해결**
 
-기술적인 키와 사람이 보는 식별자를 분리. 프레임워크가 자동으로 만들어 주는 UUID(`EmployeeUuid`)를 실제 기본키로 두고, 사번(`EmployeeId`)은 키가 아닌 별도 필드로 분리함. `EmployeeId`는 `field( readonly: update )`로 선언해, 생성할 때만 determination으로 자동 넘버링하고 이후에는 수정되지 않도록 함.
+기술적인 키와 사람이 보는 식별자를 분리. 프레임워크가 자동으로 만들어 주는 UUID(`EmployeeUuid`)를 실제 기본키로 두고, 사번(`EmployeeId`)은 키가 아닌 별도 필드로 분리함. `EmployeeId`는 `field( readonly : update )`로 선언해, 생성할 때만 determination으로 자동 넘버링하고 이후에는 수정되지 않도록 함.
 
 ```abap
 " BDEF 선언
@@ -38,7 +38,7 @@ ENDMETHOD.
 
 ---
 
-## Case2. Odata 버전에 따라 Create 버튼 보이지 않는 문제
+## Case 2. Odata 버전에 따라 Create 버튼 보이지 않는 문제
 
 **문제 상황**
 
@@ -90,7 +90,7 @@ V2 버전에서는 draft를 사용하지 않는 구조에서도 Create가 실제
 
 ---
 
-### Case 3. 신청·승인 권한을 BO 성격에 맞게 2단으로 분리
+## Case 3. 신청·승인 권한을 BO 성격에 맞게 2단으로 분리
 
 **문제 상황**
 
