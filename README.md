@@ -3,7 +3,7 @@
 > SAP BTP ABAP Environment 위에서 **ABAP RESTful Application Programming Model(RAP)** 로 구현한 사내 요청 관리 시스템입니다. 마스터 데이터 4종과 승인 워크플로우를 갖춘 트랜잭션 업무 객체를 RAP 표준 아키텍처로 직접 설계·구현했습니다.
 > 
 
-`ABAP Cloud` · `RAP (Managed)` · `CDS` · `OData V2` · `SAP Fiori Elements` · `abapGit`
+`ABAP Cloud` · `RAP (Managed)` · `SAP BTP`
 
 ---
 
@@ -44,18 +44,12 @@
 
 ## 기술 스택
 
-| 구분 | 사용 기술 |
-| --- | --- |
-| 개발 모델 | ABAP RESTful Application Programming Model (Managed) |
-| 언어 | ABAP for Cloud Development (ABAP Cloud, strict mode) |
-| 데이터 모델 | Core Data Services (CDS) View |
-| 서비스 | OData V2 (Service Definition / Binding) |
-| UI | SAP Fiori Elements (Metadata Extension 기반) |
-| 플랫폼 / 도구 | SAP BTP ABAP Environment (Trial) · Eclipse ADT |
-| 형상 관리 | abapGit → GitHub |
+`ABAP Cloud` · `RAP (Managed)` · `SAP BTP`
 
-> 서비스 바인딩은 OData **V2 UI**를 사용합니다. (V4 UI는 draft 기반 동작을 전제로 하여, non-draft 구조에서는 Create 등 일부 기능이 노출되지 않는 이슈가 있어 V2를 선택했습니다.)
-> 
+- **플랫폼/도구**: SAP BTP ABAP Environment (Trial) · Eclipse ADT
+- **형상 관리**: abapGit → GitHub
+- **UI**: DDLX 메타데이터로 SAP Fiori Elements UI 구성 (직접 화면 코딩 X, 선언적 구성)
+- **서비스 바인딩**: OData V2 UI (V4 draft 이슈는 트러블슈팅 참고)
 
 ---
 
@@ -145,13 +139,6 @@
 직원ID 입력 시 다른 BO의 마스터 데이터를 검색해 연결하는 Value Help 기능입니다. 직원 정보뿐 아니라 연결된 부서·직급까지 함께 조회되어, CDS Association이 제대로 동작함을 보여줍니다.
 
 <img width="1583" height="852" alt="image" src="https://github.com/user-attachments/assets/dec816ca-7f1f-4110-854d-91ccff7decd3" />
-
----
-
-## 실행 / 환경
-
-- 개발/실행: SAP BTP ABAP Environment (Trial)에서 ADT로 개발, Fiori Elements Preview로 실행
-- 형상 관리: abapGit으로 본 저장소와 동기화
 
 ---
 
