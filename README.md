@@ -63,10 +63,10 @@
 
 | 도메인 | 유형 | 주요 기능 |
 | --- | --- | --- |
-| Department (부서) | 마스터 | CRUD, 활성/비활성 |
-| Position (직급) | 마스터 | CRUD, 활성/비활성 |
-| Employee (직원) | 마스터 | CRUD, EmployeeId 자동 채번, 이메일 검증, 부서·직급 연결 |
-| Request Type (요청 유형) | 마스터 | CRUD, 활성/비활성 |
+| Department (부서) | 마스터 | CRU, 활성/비활성 |
+| Position (직급) | 마스터 | CRU, 활성/비활성 |
+| Employee (직원) | 마스터 | CRU, EmployeeId 자동 채번, 이메일 검증, 부서·직급 연결 |
+| Request Type (요청 유형) | 마스터 | CRU, 활성/비활성 |
 | **Request Header (요청)** | **트랜잭션** | **등록 → 승인/반려/취소 워크플로우** |
 
 ---
