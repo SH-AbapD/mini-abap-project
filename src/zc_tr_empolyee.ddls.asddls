@@ -12,7 +12,7 @@ define root view entity ZC_TR_EMPOLYEE
       @Consumption.valueHelpDefinition: [
         {
           entity: {
-            name: 'ZC_TR_DEPARTMENT',
+            name: 'ZC_TR_DEPT_VH',
             element: 'DepartmentId'
           }
         }
@@ -24,7 +24,7 @@ define root view entity ZC_TR_EMPOLYEE
       @Consumption.valueHelpDefinition: [
       {
           entity: {
-            name: 'ZC_TR_POSITION',
+            name: 'ZC_TR_POS_VH',
             element: 'PositionId'
           }
         }

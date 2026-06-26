@@ -9,7 +9,7 @@ define root view entity ZC_TR_REQ_HDR
 
       @Consumption.valueHelpDefinition: [{
       entity: {
-        name:    'ZC_TR_EMPOLYEE',
+        name:    'ZC_TR_EMPLOYEE_VH',
         element: 'EmployeeId'
       }
       }]
@@ -18,7 +18,7 @@ define root view entity ZC_TR_REQ_HDR
 
       @Consumption.valueHelpDefinition: [{
         entity: {
-          name:    'ZC_TR_REQ_TYPE',
+          name:    'ZC_TR_REQ_TYPE_VH',
           element: 'RequestTypeId'
         }
       }]
