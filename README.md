@@ -58,7 +58,7 @@
 
 ## 핵심 기능: 요청 승인 WorkFlow
 
-요청은 생성 시 **대기(P)** 상태가 되며, 관리자의 처리에 따라 상태가 전이됩니다. 한 번 처리된 요청은 다시 수정·처리할 수 없도록 상태 기반 권한으로 제어됩니다.
+요청은 생성 시 **대기(P)** 상태가 되며, 관리자의 승인·반려 또는 신청자 본인의 취소에 따라 상태가 변하게 됩니다. 한 번 처리된 요청은 다시 수정·처리할 수 없도록 상태 기반 권한으로 제어됩니다.
 
 <img width="1448" height="1086" alt="image" src="https://github.com/user-attachments/assets/b05de259-57bd-425b-b036-ecacb1176077" />
 
@@ -96,7 +96,7 @@
 
 ### 1. 요청 목록 — 워크플로우 처리 결과 (List Report)
 
-승인(A) / 반려(R) / 취소(C) / 대기(P) 상태가 함께 표시되어, 상태 머신 기반 워크플로우가 실제로 동작함을 보여줍니다.
+승인(A) / 반려(R) / 취소(C) / 대기(P) 상태가 함께 표시되어, 상태 기반 승인 워크플로우가 실제로 동작함을 보여줍니다.
 
 <img width="1574" height="479" alt="image" src="https://github.com/user-attachments/assets/d0954b23-c9fc-4607-917f-b6f8a9adc5f4" />
 
@@ -105,7 +105,7 @@
 
 ### 2. 요청 상세 — 반려 처리 건 (Object Page)
 
-반려(R) 처리된 요청의 상세 화면입니다. 처리자 · 처리일시(Time Stamp) · 거절사유가 액션 실행 시 자동으로 기록되어, 워크플로우 처리 결과가 데이터로 남는 것을 확인할 수 있습니다.
+반려(R) 처리된 요청의 상세 화면입니다. 처리자 · 처리일시(Time Stamp)가 액션 실행 시 자동으로 기록되고, 반려 사유에 대한 내용은 Parameter로 받아 저장하여, 워크플로우 처리 결과가 데이터로 남는 것을 확인할 수 있습니다.
 
 <img width="1589" height="237" alt="image" src="https://github.com/user-attachments/assets/28e725de-aa5b-4217-b91a-747f01b56011" />
 
@@ -113,7 +113,7 @@
 
 ### **3. Value Help — 직원 검색 (CDS Association)**
 
-직원ID 입력 시 다른 BO의 마스터 데이터를 검색해 연결하는 Value Help 다이얼로그입니다. 직원 정보뿐 아니라 연결된 부서·직급까지 함께 조회되어, CDS Association이 올바르게 동작함을 보여줍니다.
+직원ID 입력 시 다른 BO의 마스터 데이터를 검색해 연결하는 Value Help 기능입니다. 직원 정보뿐 아니라 연결된 부서·직급까지 함께 조회되어, CDS Association이 제대로 동작함을 보여줍니다.
 
 <img width="1583" height="852" alt="image" src="https://github.com/user-attachments/assets/dec816ca-7f1f-4110-854d-91ccff7decd3" />
 
