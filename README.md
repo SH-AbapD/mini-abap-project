@@ -48,7 +48,7 @@
 
 - **플랫폼/도구**: SAP BTP ABAP Environment (Trial) · Eclipse ADT
 - **형상 관리**: abapGit → GitHub
-- **UI**: DDLX 메타데이터로 SAP Fiori Elements UI 구성 (직접 화면 코딩 X, 선언적 구성)
+- **UI**: Metadata Extension으로 SAP Fiori Elements UI 구성
 - **서비스 바인딩**: OData V2 UI (V4 draft 이슈는 트러블슈팅 참고)
 
 ---
