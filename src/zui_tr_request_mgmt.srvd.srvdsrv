@@ -1,0 +1,8 @@
+@EndUserText.label: 'Employee Request Management Service Def'
+define service ZUI_TR_REQUEST_MGMT {
+  expose ZC_TR_REQ_HDR    as RequestHeader;
+  expose ZC_TR_DEPARTMENT as Department;
+  expose ZC_TR_POSITION   as Position;
+  expose ZC_TR_EMPOLYEE   as Employee;
+  expose ZC_TR_REQ_TYPE   as RequestType;
+}
