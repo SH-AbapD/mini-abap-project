@@ -3,8 +3,8 @@
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_TR_EMPOLYEE
   as select from ztr_employee
-  association [0..1] to ZI_TR_DEPARTMENT as _Department on $projection.DepartmentId = _Department.DepartmentId
-  association [0..1] to ZI_TR_POSITION   as _Position   on $projection.PositionId = _Position.PositionId
+  association [1..1] to ZI_TR_DEPARTMENT as _Department on $projection.DepartmentId = _Department.DepartmentId
+  association [1..1] to ZI_TR_POSITION   as _Position   on $projection.PositionId = _Position.PositionId
 {
   key employee_uuid              as EmployeeUuid,
       employee_id                as EmployeeId,
