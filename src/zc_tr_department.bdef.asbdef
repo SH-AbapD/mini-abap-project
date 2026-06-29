@@ -1,5 +1,6 @@
 projection;
 strict ( 2 );
+use draft;
 
 define behavior for ZC_TR_DEPARTMENT alias Dept
 {
@@ -8,4 +9,10 @@ define behavior for ZC_TR_DEPARTMENT alias Dept
 
   use action deactivate;
   use action reactivate;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
 }

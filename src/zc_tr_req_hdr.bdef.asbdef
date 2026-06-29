@@ -1,5 +1,6 @@
-projection implementation in class zbp_c_tr_req_hdr unique;
+projection;
 strict ( 2 );
+use draft;
 
 define behavior for ZC_TR_REQ_HDR alias Req
 {
@@ -9,4 +10,10 @@ define behavior for ZC_TR_REQ_HDR alias Req
   use action cancel;
   use action approve;
   use action reject;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
 }

@@ -1,9 +1,11 @@
 managed implementation in class zbp_i_tr_department unique;
 strict ( 2 );
+with draft;
 
 define behavior for ZI_TR_DEPARTMENT alias Dept
 persistent table ztr_department
-lock master
+draft table ztr_department_d
+lock master total etag LastChangedAt
 authorization master ( global )
 etag master LastChangedAt
 {
@@ -13,9 +15,15 @@ etag master LastChangedAt
   action deactivate;
   action reactivate;
 
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
   determination setInitialStatus on modify { create; }
 
-  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy,IsActive;
+  field ( readonly ) CreatedAt, CreatedBy, LastChangedAt, LastChangedBy, IsActive;
 
   field ( readonly : update ) DepartmentId;
 

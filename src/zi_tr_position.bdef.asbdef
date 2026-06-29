@@ -1,9 +1,11 @@
 managed implementation in class zbp_i_tr_position unique;
 strict ( 2 );
+with draft;
 
 define behavior for ZI_TR_POSITION alias Pos
 persistent table ztr_position
-lock master
+draft table ztr_position_d
+lock master total etag LastChangedAt
 authorization master ( global )
 etag master LastChangedAt
 {
@@ -12,6 +14,12 @@ etag master LastChangedAt
 
   action deactivatePosition;
   action reactivatePosition;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Resume;
+  draft action Discard;
+  draft determine action Prepare;
 
   determination setInitialStatus on modify { create; }
 

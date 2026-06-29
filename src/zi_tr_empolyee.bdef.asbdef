@@ -1,9 +1,11 @@
 managed implementation in class zbp_i_tr_empolyee unique;
 strict ( 2 );
+with draft;
 
 define behavior for ZI_TR_EMPOLYEE alias Emp
 persistent table ztr_employee
-lock master
+draft table ztr_employee_d
+lock master total etag LastChangedAt
 authorization master ( global )
 etag master LastChangedAt
 {
@@ -13,6 +15,14 @@ etag master LastChangedAt
   action deactivateEmployee;
   action reactivateEmployee;
 
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare{
+  validation validateEmail;
+  }
+
   determination setInitialStatus on modify { create; }
   determination setEmployeeId on modify { create; }
 
@@ -20,7 +30,7 @@ etag master LastChangedAt
 
   field ( numbering : managed, readonly ) EmployeeUuid;
 
-  field ( readonly ) EmployeeId, DepartmentName, PositionName , CreatedAt, CreatedBy, LastChangedAt,
+  field ( readonly ) EmployeeId, CreatedAt, CreatedBy, LastChangedAt,
   LastChangedBy, IsActive;
 
   mapping for ztr_employee
