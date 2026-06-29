@@ -218,19 +218,28 @@ CLASS lhc_Emp IMPLEMENTATION.
     DATA lv_next_num TYPE i.
 
     IF lv_max_id IS INITIAL.
-      lv_next_num = 1.
+      lv_next_num = 0.
     ELSE.
-      lv_next_num = lv_max_id+3 + 1.
+      lv_next_num = lv_max_id+3.
     ENDIF.
 
-    MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
-      ENTITY Emp
-      UPDATE FIELDS ( EmployeeId )
-      WITH VALUE #(
-        FOR ls_emp IN lt_emp
-        WHERE ( EmployeeId IS INITIAL )
-        ( %tky       = ls_emp-%tky
-          EmployeeId = |EMP{ lv_next_num WIDTH = 4 PAD = '0' }| ) ).
+    DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee.
+
+
+    LOOP AT lt_emp INTO DATA(ls_emp) WHERE EmployeeId IS INITIAL.
+      lv_next_num = lv_next_num + 1.
+      APPEND VALUE #(
+        %tky       = ls_emp-%tky
+        EmployeeId = |EMP{ lv_next_num WIDTH = 4 PAD = '0' }|
+      ) TO lt_update.
+    ENDLOOP.
+
+    IF lt_update IS NOT INITIAL.
+      MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        UPDATE FIELDS ( EmployeeId )
+        WITH lt_update.
+    ENDIF.
 
   ENDMETHOD.
 
