@@ -7,8 +7,8 @@ define view entity ZC_TR_EMPLOYEE_VH
 {
   key EmployeeId,
       EmployeeName,
-      DepartmentName,
-      PositionName
+      _Department.DepartmentName,
+      _Position.PositionName
 }
 where
   IsActive = 'A'

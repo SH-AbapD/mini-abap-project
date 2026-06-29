@@ -17,9 +17,9 @@ define root view entity ZC_TR_EMPOLYEE
           }
         }
       ]
-      @ObjectModel.text.element: ['DepartmentName']
+      @ObjectModel.text.association: '_Department'
       DepartmentId,
-      DepartmentName,
+      _Department.DepartmentName,
 
       @Consumption.valueHelpDefinition: [
       {
@@ -29,9 +29,9 @@ define root view entity ZC_TR_EMPOLYEE
           }
         }
       ]
-      @ObjectModel.text.element: ['PositionName']
+      @ObjectModel.text.association: '_Position'
       PositionId,
-      PositionName,
+      _Position.PositionName,
       Email,
       
       CreatedAt,

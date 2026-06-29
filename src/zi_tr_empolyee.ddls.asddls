@@ -10,9 +10,9 @@ define root view entity ZI_TR_EMPOLYEE
       employee_id                as EmployeeId,
       employee_name              as EmployeeName,
 
-      @ObjectModel.text.element: ['DepartmentName']
+      @ObjectModel.text.association: '_Department'
       department_id              as DepartmentId,
-      @ObjectModel.text.element: [ 'PositionName' ]
+      @ObjectModel.text.association: '_Position'
       position_id                as PositionId,
       email                      as Email,
 
@@ -28,9 +28,6 @@ define root view entity ZI_TR_EMPOLYEE
 
       is_active                  as IsActive,
 
-      _Department.DepartmentName as DepartmentName,
       _Department,
-
-      _Position.PositionName,
       _Position
 }
