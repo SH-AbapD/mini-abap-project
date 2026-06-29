@@ -5,7 +5,9 @@
 define view entity ZC_TR_EMPLOYEE_VH
   as select from ZI_TR_EMPOLYEE
 {
-  key EmployeeId,
+  @UI.hidden: true
+  key EmployeeUuid,
+      EmployeeId,
       EmployeeName,
       _Department.DepartmentName,
       _Position.PositionName
