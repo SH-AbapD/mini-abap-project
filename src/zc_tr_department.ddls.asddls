@@ -3,7 +3,8 @@
 @Metadata.ignorePropagatedAnnotations: true
 @Metadata.allowExtensions: true
 @ObjectModel.resultSet.sizeCategory: #XS
-define root view entity ZC_TR_DEPARTMENT 
+define root view entity ZC_TR_DEPARTMENT
+  provider contract transactional_query 
     as projection on ZI_TR_DEPARTMENT
 {
     key DepartmentId,

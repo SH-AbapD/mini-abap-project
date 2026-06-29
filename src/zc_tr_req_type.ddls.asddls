@@ -3,6 +3,7 @@
 @Metadata.ignorePropagatedAnnotations: false
 @Metadata.allowExtensions: true
 define root view entity ZC_TR_REQ_TYPE
+  provider contract transactional_query
   as projection on ZI_TR_REQ_TYPE
 {
   key RequestTypeId,
