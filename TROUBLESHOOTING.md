@@ -86,7 +86,9 @@ V2, V4 버전 모두 생성. V2 버전에서는 정상적으로 버튼이 나타
 
 <img width="461" height="143" alt="image" src="https://github.com/user-attachments/assets/2028e5be-42f2-4f5e-bccf-1cf0fc931534" />
 
-V2 버전에서는 draft를 사용하지 않는 구조에서도 Create가 실제 데이터를 생성하는 흐름이기 때문에 동일한 BDEF로도 생성·수정 기능이 정상 동작함을 확인함. (draft 도입은 향후 개선 과제로 분리)
+V2 버전에서는 draft를 사용하지 않는 구조에서도 Create가 실제 데이터를 생성하는 흐름이기 때문에 동일한 BDEF로도 생성·수정 기능이 정상 동작함을 확인함.
+
+> **(2025-06-30 후속)** 이후 전 BO에 `with draft`를 도입하여 draft-enabled 구조로 전환, V4 UI에서도 Create가 정상 동작함을 확인함. 향후 개선 과제로 분리했던 draft 도입을 완료하고 V2→V4로 전환함.
 
 ---
 
