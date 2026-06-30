@@ -14,6 +14,10 @@ CLASS lhc_Req DEFINITION INHERITING FROM cl_abap_behavior_handler.
       IMPORTING keys FOR Req~setInitialStatus.
     METHODS validateRequestDate FOR VALIDATE ON SAVE
       IMPORTING keys FOR Req~validateRequestDate.
+    METHODS validateEmployee FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Req~validateEmployee.
+    METHODS validateRequestType FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Req~validateRequestType.
 
 ENDCLASS.
 
@@ -119,5 +123,85 @@ CLASS lhc_Req IMPLEMENTATION.
     ENDLOOP.
 
   ENDMETHOD.
+
+METHOD validateEmployee.
+
+  READ ENTITIES OF zi_tr_req_hdr_self IN LOCAL MODE
+    ENTITY Req
+    FIELDS ( EmployeeId )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_req).
+
+  LOOP AT lt_req INTO DATA(ls_req).
+
+    SELECT SINGLE employee_id, is_active
+      FROM ztr_employee
+      WHERE employee_id = @ls_req-EmployeeId
+      INTO @DATA(ls_employee).
+
+    IF sy-subrc <> 0.
+      APPEND VALUE #( %tky = ls_req-%tky ) TO failed-req.
+      APPEND VALUE #(
+        %tky = ls_req-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text     = |존재하지 않는 직원 ID입니다: { ls_req-EmployeeId }| )
+      ) TO reported-req.
+      CONTINUE.
+    ENDIF.
+
+    IF ls_employee-is_active <> 'A'.
+      APPEND VALUE #( %tky = ls_req-%tky ) TO failed-req.
+      APPEND VALUE #(
+        %tky = ls_req-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text     = |비활성 직원은 요청자로 지정할 수 없습니다: { ls_req-EmployeeId }| )
+      ) TO reported-req.
+    ENDIF.
+
+  ENDLOOP.
+
+ENDMETHOD.
+
+METHOD validateRequestType.
+
+  READ ENTITIES OF zi_tr_req_hdr_self IN LOCAL MODE
+    ENTITY Req
+    FIELDS ( RequestTypeId )
+    WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_req).
+
+  LOOP AT lt_req INTO DATA(ls_req).
+
+    SELECT SINGLE request_type_id, is_active
+      FROM ztr_req_type
+      WHERE request_type_id = @ls_req-RequestTypeId
+      INTO @DATA(ls_req_type).
+
+    IF sy-subrc <> 0.
+      APPEND VALUE #( %tky = ls_req-%tky ) TO failed-req.
+      APPEND VALUE #(
+        %tky = ls_req-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text     = |존재하지 않는 요청 유형입니다: { ls_req-RequestTypeId }| )
+      ) TO reported-req.
+      CONTINUE.
+    ENDIF.
+
+    IF ls_req_type-is_active <> 'A'.
+      APPEND VALUE #( %tky = ls_req-%tky ) TO failed-req.
+      APPEND VALUE #(
+        %tky = ls_req-%tky
+        %msg = new_message_with_text(
+          severity = if_abap_behv_message=>severity-error
+          text     = |비활성 요청 유형은 사용할 수 없습니다: { ls_req-RequestTypeId }| )
+      ) TO reported-req.
+    ENDIF.
+
+  ENDLOOP.
+
+ENDMETHOD.
 
 ENDCLASS.

@@ -19,13 +19,19 @@ etag master LastChangedAt
   draft action Activate optimized;
   draft action Discard;
   draft action Resume;
-  draft determine action Prepare {
+  draft determine action Prepare
+  {
+    validation validateEmployee;
     validation validateRequestDate;
+    validation validateRequestType;
   }
 
   determination setInitialStatus on modify { create; }
 
+  validation validateEmployee on save { create; }
   validation validateRequestDate on save { create; update; }
+  validation validateRequestType on save { create; }
+
 
   field ( numbering : managed, readonly ) RequestUuid;
 
