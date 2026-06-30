@@ -7,7 +7,6 @@ define behavior for ZC_TR_REQ_HDR alias Req
   use create;
   use update;
 
-  use action cancel;
   use action approve;
   use action reject;
 

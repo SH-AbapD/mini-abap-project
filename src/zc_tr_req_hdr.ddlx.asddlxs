@@ -60,8 +60,7 @@ annotate entity ZC_TR_REQ_HDR with
     lineItem: [
       { position: 70 },
       { position: 80, type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
-      { position: 90, type: #FOR_ACTION, dataAction: 'reject',  label: 'Reject'  },
-      { position: 100, type: #FOR_ACTION, dataAction: 'cancel',  label: 'Cancel'  }
+      { position: 90, type: #FOR_ACTION, dataAction: 'reject',  label: 'Reject'  }
     ],
     identification: [ { position: 70 } ]
   }

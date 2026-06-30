@@ -13,7 +13,6 @@ etag master LastChangedAt
   update;
   internal delete;
 
-  action cancel;
   action approve;
   action reject parameter ZTR_REQ_REJECT_PARAM;
 
