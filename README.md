@@ -49,7 +49,7 @@
 - **플랫폼/도구**: SAP BTP ABAP Environment (Trial) · Eclipse ADT
 - **형상 관리**: abapGit → GitHub
 - **UI**: Metadata Extension으로 SAP Fiori Elements UI 구성
-- **서비스 바인딩**: OData V2 UI (V4 draft 이슈는 트러블슈팅 참고)
+- **서비스 바인딩**: OData V4 UI · draft-enabled (2025-06-30 V2→V4 전환)
 
 ---
 
@@ -65,7 +65,7 @@
 | --- | --- | --- |
 | Department (부서) | 마스터 | CRU, 활성/비활성 |
 | Position (직급) | 마스터 | CRU, 활성/비활성 |
-| Employee (직원) | 마스터 | CRU, EmployeeId 자동 채번, 이메일 검증, 부서·직급 연결 |
+| Employee (직원) | 마스터 | CRU, EmployeeId 자동 채번(Number Range Object), 이메일 검증, 부서·직급 연결 |
 | Request Type (요청 유형) | 마스터 | CRU, 활성/비활성 |
 | **Request Header (요청)** | **트랜잭션** | **등록 → 승인/반려/취소 워크플로우** |
 
@@ -151,9 +151,9 @@
 
 현재는 관리자와 신청자가 동일한 단일 앱을 사용하며, 권한은 Behavior 레벨(Global/Instance Authorization)에서 제어합니다. 다만 역할별로 보이는 화면 자체를 분리하면 사용성과 보안이 더 명확해집니다. 향후 신청자용/관리자용 Projection View와 Service Binding을 분리하고, 본인 요청만 필터링하는 구조로 확장할 수 있습니다.
 
-**2. OData V2 → V4 + draft 전환**
+**2. OData V2 → V4 + draft 전환** — ✅ 2025-06-30 해결
 
-draft 기반 동작 이슈로 현재 V2 UI를 사용하고 있습니다. V4 UI + draft-enabled 구조로 전환하면 임시 저장, 동시 편집 제어 등 최신 Fiori Elements 기능을 활용할 수 있습니다.
+~~draft 기반 동작 이슈로 현재 V2 UI를 사용하고 있습니다.~~ V4 UI + draft-enabled 구조로 전환 완료. 임시 저장 및 draft 기반 편집 흐름을 적용함
 
 **3. 테스트 커버리지 확대**
 
