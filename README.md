@@ -147,9 +147,13 @@
 > 현재 범위에서의 한계점과, 다음 단계로 확장할 방향입니다.
 > 
 
-**1. 요청 취소(cancel)의 화면·권한 분리**
+**1. 요청 신청자용/관리자용 화면 분리** — ✅ 2025-06-30 해결
 
-현재는 관리자와 신청자가 동일한 단일 앱을 사용하며, 권한은 Behavior 레벨(Global/Instance Authorization)에서 제어합니다. 다만 역할별로 보이는 화면 자체를 분리하면 사용성과 보안이 더 명확해집니다. 향후 신청자용/관리자용 Projection View와 Service Binding을 분리하고, 본인 요청만 필터링하는 구조로 확장할 수 있습니다.
+~~현재는 관리자와 신청자가 동일한 단일 앱을 사용하며, 권한은 Behavior 레벨에서 제어합니다.~~
+신청자 전용 Projection View(`ZC_TR_REQ_HDR_SELF`)와 Service(`ZUI_REQUEST_SELF`)를 분리하고,
+Access Control(`CreatedBy = $session.user`)로 본인이 생성한 요청만 조회되도록 구성함.
+관리자용 통합 서비스(`ZUI_TR_REQUEST_MGMT`)와 신청자용 서비스가 같은 BO를 공유하되,
+노출 범위와 가능한 액션이 역할별로 분리되는 구조로 확장 완료.
 
 **2. OData V2 → V4 + draft 전환** — ✅ 2025-06-30 해결
 
