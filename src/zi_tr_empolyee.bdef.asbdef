@@ -21,12 +21,14 @@ etag master LastChangedAt
   draft action Resume;
   draft determine action Prepare{
   validation validateEmail;
+  validation validateDuplicateEmpId;
   }
 
   determination setInitialStatus on modify { create; }
   determination setEmployeeId on modify { create; }
 
   validation validateEmail on save { create; update; }
+  validation validateDuplicateEmpId on save { create; }
 
   field ( numbering : managed, readonly ) EmployeeUuid;
 

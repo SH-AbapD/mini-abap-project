@@ -18,6 +18,8 @@ CLASS lhc_Emp DEFINITION INHERITING FROM cl_abap_behavior_handler.
 
     METHODS validateEmail FOR VALIDATE ON SAVE
       IMPORTING keys FOR Emp~validateEmail.
+    METHODS validateDuplicateEmpId FOR VALIDATE ON SAVE
+      IMPORTING keys FOR Emp~validateDuplicateEmpId.
 
 ENDCLASS.
 
@@ -135,7 +137,7 @@ CLASS lhc_Emp IMPLEMENTATION.
       APPEND LINES OF lt_reported-emp TO reported-emp.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-emp[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-emp[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
@@ -190,7 +192,7 @@ CLASS lhc_Emp IMPLEMENTATION.
       APPEND LINES OF lt_reported-emp TO reported-emp.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-emp[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-emp[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
@@ -211,35 +213,41 @@ CLASS lhc_Emp IMPLEMENTATION.
         WITH CORRESPONDING #( keys )
         RESULT DATA(lt_emp).
 
-    SELECT MAX( employee_id )
-        FROM ztr_employee
-        INTO @DATA(lv_max_id).
+    DATA lt_target LIKE lt_emp.
+    lt_target = lt_emp.
+    DELETE lt_target WHERE EmployeeId IS NOT INITIAL.
 
-    DATA lv_next_num TYPE i.
+    TRY.
+        cl_numberrange_runtime=>number_get(
+          EXPORTING
+           nr_range_nr = '01'
+           object = 'ZNR_EMP'
+           quantity = CONV #( lines( lt_target ) )
+          IMPORTING
+           number = DATA(lv_number)
+           returned_quantity = DATA(lv_qty) ).
+      CATCH cx_number_ranges INTO DATA(lx_nr).
+        RETURN.
+    ENDTRY.
 
-    IF lv_max_id IS INITIAL.
-      lv_next_num = 0.
-    ELSE.
-      lv_next_num = lv_max_id+3.
-    ENDIF.
+    DATA lv_next TYPE i.
+
+    lv_next = lv_number - lv_qty + 1.
 
     DATA lt_update TYPE TABLE FOR UPDATE zi_tr_empolyee.
 
-
-    LOOP AT lt_emp INTO DATA(ls_emp) WHERE EmployeeId IS INITIAL.
-      lv_next_num = lv_next_num + 1.
+    LOOP AT lt_target INTO DATA(ls_emp).
       APPEND VALUE #(
-        %tky       = ls_emp-%tky
-        EmployeeId = |EMP{ lv_next_num WIDTH = 4 PAD = '0' }|
-      ) TO lt_update.
+    %tky       = ls_emp-%tky
+    EmployeeId = |EMP{ lv_next WIDTH = 4 PAD = '0' }|
+  ) TO lt_update.
+      lv_next = lv_next + 1.
     ENDLOOP.
 
-    IF lt_update IS NOT INITIAL.
-      MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
-        ENTITY Emp
-        UPDATE FIELDS ( EmployeeId )
-        WITH lt_update.
-    ENDIF.
+    MODIFY ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+      ENTITY Emp
+      UPDATE FIELDS ( EmployeeId )
+      WITH lt_update.
 
   ENDMETHOD.
 
@@ -275,6 +283,33 @@ CLASS lhc_Emp IMPLEMENTATION.
         APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
       ENDIF.
 
+    ENDLOOP.
+
+  ENDMETHOD.
+
+  METHOD validateDuplicateEmpId.
+    READ ENTITIES OF zi_tr_empolyee IN LOCAL MODE
+        ENTITY Emp
+        FIELDS ( EmployeeId )
+        WITH CORRESPONDING #( keys )
+        RESULT DATA(lt_emp).
+
+    LOOP AT lt_emp INTO DATA(ls_emp).
+      SELECT SINGLE employee_id
+      FROM ztr_employee
+      WHERE employee_id = @ls_emp-EmployeeId
+      AND employee_uuid <> @ls_emp-EmployeeUuid
+      INTO @DATA(lv_existing).
+
+      IF sy-subrc = 0.
+        APPEND VALUE #(
+          %tky = ls_emp-%tky
+          %msg = new_message_with_text(
+                   severity = if_abap_behv_message=>severity-error
+                   text     = |직원 ID { ls_emp-EmployeeId }가 이미 존재합니다.| )
+        ) TO reported-emp.
+        APPEND VALUE #( %tky = ls_emp-%tky ) TO failed-emp.
+      ENDIF.
     ENDLOOP.
 
   ENDMETHOD.
