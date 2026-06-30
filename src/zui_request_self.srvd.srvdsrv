@@ -1,0 +1,4 @@
+@EndUserText.label: 'Request Header for provider'
+define service ZUI_REQUEST_SELF {
+  expose ZC_TR_REQ_HDR_SELF;
+}
