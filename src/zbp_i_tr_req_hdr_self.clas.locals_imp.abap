@@ -73,6 +73,8 @@ CLASS lhc_Req IMPLEMENTATION.
 
   METHOD cancel.
 
+  GET TIME STAMP FIELD data(lv_processed_at).
+
     MODIFY ENTITIES OF zi_tr_req_hdr_self IN LOCAL MODE
         ENTITY Req
         UPDATE FIELDS ( Status )
@@ -80,6 +82,8 @@ CLASS lhc_Req IMPLEMENTATION.
          FOR key IN keys (
              %tky   = key-%tky
              Status = 'C'
+             ProcessedAt = lv_processed_at
+             ProcessedId = sy-uname
     )
   ).
 
