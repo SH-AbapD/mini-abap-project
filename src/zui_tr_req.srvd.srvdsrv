@@ -1,4 +1,0 @@
-@EndUserText.label: 'Service Definition'
-define service ZUI_TR_REQ {
-  expose ZC_TR_REQ_HDR;
-}
