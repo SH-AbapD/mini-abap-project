@@ -150,10 +150,7 @@
 **1. 요청 신청자용/관리자용 화면 분리** — ✅ 2025-06-30 해결
 
 ~~현재는 관리자와 신청자가 동일한 단일 앱을 사용하며, 권한은 Behavior 레벨에서 제어합니다.~~
-신청자 전용 Projection View(`ZC_TR_REQ_HDR_SELF`)와 Service(`ZUI_REQUEST_SELF`)를 분리하고,
-Access Control(`CreatedBy = $session.user`)로 본인이 생성한 요청만 조회되도록 구성함.
-관리자용 통합 서비스(`ZUI_TR_REQUEST_MGMT`)와 신청자용 서비스가 같은 BO를 공유하되,
-노출 범위와 가능한 액션이 역할별로 분리되는 구조로 확장 완료.
+신청자 전용 BO(ZI_TR_REQ_HDR_SELF)와 서비스(ZUI_REQUEST_SELF)를 관리자용과 별도로 정의하되, 동일한 persistent 테이블(ztr_req_hdr)을 공유하도록 구성. Access Control(CreatedBy = $session.user)로 신청자는 본인 요청만 조회 가능.
 
 **2. OData V2 → V4 + draft 전환** — ✅ 2025-06-30 해결
 
