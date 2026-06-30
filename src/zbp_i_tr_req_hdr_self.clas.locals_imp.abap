@@ -77,7 +77,7 @@ CLASS lhc_Req IMPLEMENTATION.
 
     MODIFY ENTITIES OF zi_tr_req_hdr_self IN LOCAL MODE
         ENTITY Req
-        UPDATE FIELDS ( Status )
+        UPDATE FIELDS ( Status ProcessedAt ProcessedId )
          WITH VALUE #(
          FOR key IN keys (
              %tky   = key-%tky
