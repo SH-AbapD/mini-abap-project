@@ -1,4 +1,4 @@
-@AccessControl.authorizationCheck: #NOT_REQUIRED
+@AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'Request Header Interface View'
 @Metadata.ignorePropagatedAnnotations: true
 define root view entity ZI_TR_REQ_HDR_SELF

@@ -1,4 +1,4 @@
-@AccessControl.authorizationCheck: #NOT_REQUIRED
+@AccessControl.authorizationCheck: #CHECK
 @EndUserText.label: 'providers request(self reqeust)'
 @Metadata.ignorePropagatedAnnotations: true
 @Metadata.allowExtensions: true

@@ -6,5 +6,5 @@ define role ZC_TR_REQ_HDR_SELF {
             on
                 ZI_TR_REQ_HDR_SELF
                     where
-                        CreatedBy = $session.user;          
+                        CreatedBy = $session.user;
 }
