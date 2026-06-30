@@ -11,6 +11,7 @@ etag master LastChangedAt
 {
   create ( authorization : global );
   update;
+  internal delete;
 
   action cancel;
   action approve;

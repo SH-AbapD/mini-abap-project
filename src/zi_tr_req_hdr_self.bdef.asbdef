@@ -11,6 +11,7 @@ etag master LastChangedAt
 {
   create;
   update;
+  internal delete;
 
   action cancel;
 
