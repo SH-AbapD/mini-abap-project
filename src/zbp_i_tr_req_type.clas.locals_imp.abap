@@ -99,7 +99,7 @@ CLASS lhc_ReqType IMPLEMENTATION.
       APPEND LINES OF lt_reported-ReqType TO reported-ReqType.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-ReqType[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-ReqType[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
@@ -154,7 +154,7 @@ CLASS lhc_ReqType IMPLEMENTATION.
       APPEND LINES OF lt_reported-reqType TO reported-reqType.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-reqType[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-reqType[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(

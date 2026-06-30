@@ -128,7 +128,7 @@ CLASS lhc_Dept IMPLEMENTATION.
       APPEND LINES OF lt_reported-dept TO reported-dept.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-dept[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-dept[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
@@ -183,7 +183,7 @@ CLASS lhc_Dept IMPLEMENTATION.
       APPEND LINES OF lt_reported-dept TO reported-dept.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-dept[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-dept[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(

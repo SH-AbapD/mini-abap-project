@@ -100,7 +100,7 @@ CLASS lhc_Pos IMPLEMENTATION.
       APPEND LINES OF lt_reported-pos TO reported-pos.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-pos[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-pos[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
@@ -155,7 +155,7 @@ CLASS lhc_Pos IMPLEMENTATION.
       APPEND LINES OF lt_reported-pos TO reported-pos.
 
       LOOP AT lt_update INTO DATA(ls_update).
-        IF NOT line_exists( lt_failed-pos[ %tky = ls_update-%tky ] ).
+        IF NOT line_exists( lt_failed-pos[ KEY id %tky = ls_update-%tky ] ).
           APPEND VALUE #(
             %tky = ls_update-%tky
             %msg = new_message_with_text(
