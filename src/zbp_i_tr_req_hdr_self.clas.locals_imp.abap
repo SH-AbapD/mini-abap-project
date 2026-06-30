@@ -120,7 +120,7 @@ CLASS lhc_Req IMPLEMENTATION.
            %tky = ls_req-%tky
            %msg = new_message_with_text(
                 severity = if_abap_behv_message=>severity-error
-                text = '요청일은 오늘 이후 날짜여야 합니다.'
+                text = '요청일은 오늘 또는 오늘 이후 날짜여야 합니다.'
            )
          ) TO reported-req.
       ENDIF.
