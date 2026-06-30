@@ -1,0 +1,17 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_TR_REQ_HDR_SELF alias Req
+{
+  use create;
+  use update;
+
+  use action cancel;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+}

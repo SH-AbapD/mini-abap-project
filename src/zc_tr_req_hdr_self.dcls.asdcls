@@ -1,0 +1,10 @@
+@EndUserText.label: 'provider request access control'
+@MappingRole: true
+define role ZC_TR_REQ_HDR_SELF {
+    grant
+        select
+            on
+                ZI_TR_REQ_HDR_SELF
+                    where
+                        CreatedBy = $session.user;          
+}

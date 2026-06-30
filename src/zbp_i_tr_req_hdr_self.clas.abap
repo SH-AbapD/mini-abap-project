@@ -1,0 +1,5 @@
+CLASS zbp_i_tr_req_hdr_self DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_tr_req_hdr_self.
+ENDCLASS.
+
+CLASS zbp_i_tr_req_hdr_self IMPLEMENTATION.
+ENDCLASS.
