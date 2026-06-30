@@ -272,7 +272,7 @@ CLASS lhc_Emp IMPLEMENTATION.
         CONTINUE.
       ENDIF.
 
-      FIND PCRE '[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}' IN ls_emp-Email.
+      FIND PCRE '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$' IN ls_emp-Email.
       IF sy-subrc <> 0.
         APPEND VALUE #(
           %tky = ls_emp-%tky
