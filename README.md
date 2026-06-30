@@ -152,6 +152,11 @@
 ~~현재는 관리자와 신청자가 동일한 단일 앱을 사용하며, 권한은 Behavior 레벨에서 제어합니다.~~
 신청자 전용 BO(ZI_TR_REQ_HDR_SELF)와 서비스(ZUI_REQUEST_SELF)를 관리자용과 별도로 정의하되, 동일한 persistent 테이블(ztr_req_hdr)을 공유하도록 구성. Access Control(CreatedBy = $session.user)로 신청자는 본인 요청만 조회 가능.
 
+> **한계**: BTP Trial은 단일 사용자 환경이라, 신청자/관리자를 서로 다른 계정으로
+> 로그인해 권한 필터링이 실제로 분리 동작하는지, 두 BO가 같은 테이블의 lock을
+> 동시에 점유할 때 충돌이 없는지를 실증하지 못함. 멀티 유저 환경에서의 동작
+> 검증을 향후 과제로 둠.
+
 **2. OData V2 → V4 + draft 전환** — ✅ 2025-06-30 해결
 
 ~~draft 기반 동작 이슈로 현재 V2 UI를 사용하고 있습니다.~~ V4 UI + draft-enabled 구조로 전환 완료. 임시 저장 및 draft 기반 편집 흐름을 적용함
